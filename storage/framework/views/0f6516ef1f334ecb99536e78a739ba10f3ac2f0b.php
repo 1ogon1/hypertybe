@@ -11,10 +11,24 @@
 
 <h1>Say hello!!</h1>
 
-<img src="<?php echo e($user->image); ?>">
-<p><?php echo e($user->name); ?> <?php echo e($user->surname); ?></p>
-<p><?php echo e($user->email); ?></p>
 
+<img src="<?php echo e($user->image); ?>" width="150">
+<?php if($_SESSION['user_id'] == $user->id): ?>
+<form action="<?php echo e(route('update')); ?>" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+    <input type="file" name="image"><br>
+    <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
+    <input type="text" name="name" value="<?php echo e($user->name); ?>" placeholder="name"><br>
+    <input type="text" name="surname" value="<?php echo e($user->surname); ?>" placeholder="surname"><br>
+    <input type="email" name="email" value="<?php echo e($user->email); ?>" placeholder="email"><br>
+    <input type="password" name="password" placeholder="new password"><br>
+    <input type="submit" name="Submit">
+</form>
+<?php else: ?>
+    <p><?php echo e($user->name); ?></p>
+    <p><?php echo e($user->surname); ?></p>
+    <p><?php echo e($user->email); ?></p>
+<?php endif; ?>
 <a href="/logout">logout</a>
 
 </body>

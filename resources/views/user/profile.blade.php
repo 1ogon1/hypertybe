@@ -11,10 +11,24 @@
 
 <h1>Say hello!!</h1>
 
-<img src="{{$user->image}}">
-<p>{{$user->name}} {{$user->surname}}</p>
-<p>{{$user->email}}</p>
 
+<img src="{{$user->image}}" width="150">
+@if ($_SESSION['user_id'] == $user->id)
+<form action="{{ route('update') }}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="file" name="image"><br>
+    <input type="hidden" name="id" value="{{$user->id}}">
+    <input type="text" name="name" value="{{$user->name}}" placeholder="name"><br>
+    <input type="text" name="surname" value="{{$user->surname}}" placeholder="surname"><br>
+    <input type="email" name="email" value="{{$user->email}}" placeholder="email"><br>
+    <input type="password" name="password" placeholder="new password"><br>
+    <input type="submit" name="Submit">
+</form>
+@else
+    <p>{{$user->name}}</p>
+    <p>{{$user->surname}}</p>
+    <p>{{$user->email}}</p>
+@endif
 <a href="/logout">logout</a>
 
 </body>
