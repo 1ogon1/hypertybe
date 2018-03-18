@@ -11,12 +11,22 @@ use Ixudra\Curl\Facades\Curl;
 use \Facebook\Facebook;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PDO;
+use PDOException;
 
 class IndexController extends Controller
 {
+    public $pdo;
     public function __construct()
     {
         session_start();
+        try {
+            $this->pdo = new \PDO("mysql:host=localhost;dbname=hypertube", "root", "111111");
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
+        catch (PDOException $e) {
+            echo 'Connection failed: '. $e->getMessage();
+        }
     }
 
     public function Index()
@@ -39,7 +49,7 @@ class IndexController extends Controller
 
         ]);
         $helper = $fb->getRedirectLoginHelper();
-        $loginFb = $helper->getLoginUrl('http://localhost:80/facebooklogin');
+        $loginFb = $helper->getLoginUrl('http://localhost:8080/facebooklogin');
 
         return view('user.login')->with('loginFb', $loginFb);
     }
@@ -54,9 +64,14 @@ class IndexController extends Controller
             if ($user != null && $user->id > 0)
             {
                 if (hash('whirlpool', $_POST['password']) == $user->password) {
-                    $_SESSION['email'] = $user->email;
-                    $_SESSION['user_id'] = $user->id;
-                    return redirect('/profile/' . $user->id . '');
+                    if ($user->active == 1) {
+                        $_SESSION['email'] = $user->email;
+                        $_SESSION['user_id'] = $user->id;
+                        return redirect('/profile/' . $user->id . '');
+                    }
+                    else{
+                        return redirect('/login/')->with('warning', 'Activate account first');
+                    }
                 }
                 else {
                     return redirect('/login/')->with('warning', 'Incorrect password');
@@ -76,9 +91,8 @@ class IndexController extends Controller
 
     public function SignUp()
     {
-        if (!empty($_POST['name']) && !empty($_POST['password']) && !empty($_POST['email']))
-        {
-            if (!DB::table('users')->where('email',$_POST['email'])->first()) {
+        if (!empty($_POST['name']) && !empty($_POST['password']) && !empty($_POST['email'])) {
+            if (!DB::table('users')->where('email', $_POST['email'])->first()) {
                 $user = new User();
 
                 $user->name = $_POST['name'];
@@ -87,32 +101,32 @@ class IndexController extends Controller
                 $user->image = "";
                 $user->token = $_POST['_token'];
                 $user->password = hash('whirlpool', $_POST['password']);
+                $user->active = 0;
 
 
-                if ($user->save())
-                {
+                if ($user->save()) {
                     $activate = new Activate();
 
                     $activate->token = $_POST['_token'];
                     $activate->user_email = $_POST['email'];
 
                     $activate->save();
-//                    Mail::send('emails.welcome', ['user' => $user], function ($mail) use ($user) {
-//                        $mail->from('hello@app.com', 'Your Application');
+//                    Mail::send('', ['user' => $user], function ($mail) use ($user) {
+//                        $mail->from('konovalenkoruslan@gmail.com', 'Hypertybe');
 //
-//                        $mail->to($user->email, $user->name)->subject('Your Reminder!');
+//                        $subject = 'http://localhost:8080/active/'.$_POST['_token'];
+//                        $mail->to($user->email, $user->name)->subject($subject);
+//                    });
+//                    Mail::raw($subject, function ($message) {
+//                        $message->to($_POST['email']);
 //                    });
                     return redirect('/login/')->with('success', 'Please check you email');
-                }
-                else
-                {
+                } else {
                     return redirect('/register/')->with('error', 'Something wrong! User not saved! Sorry :(');
                 }
 
-            }
-            else
-            {
-                return redirect('/register/')->with('error', "user with email ".$_POST['email']." already exists");
+            } else {
+                return redirect('/register/')->with('error', "user with email " . $_POST['email'] . " already exists");
             }
         }
     }
@@ -130,7 +144,7 @@ class IndexController extends Controller
             $helper->getPersistentDataHandler()->set('state', $_GET['state']);
         }
         try {
-            $accessToken = $helper->getAccessToken('http://localhost:80/facebooklogin');
+            $accessToken = $helper->getAccessToken('http://localhost:8080/facebooklogin');
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -185,6 +199,7 @@ class IndexController extends Controller
             $user->password = "";
             $user->token = $accessToken->getValue();
             $user->email = $profile['email'];
+            $user->active = 0;
 
             $user->save();
 
@@ -226,7 +241,7 @@ class IndexController extends Controller
                 'client_id' => 'ad0570aea500deeacfb27d1cb682999daa4c43b6b171ca99ff9ea2713562d4aa',
                 'client_secret' => '5b2491a867c5e9c1435e90b1202ee1e0fb84c4f028e94653b18baf0776849249',
                 'code' => $_GET['code'],
-                'redirect_uri' => 'http://localhost:80/intralogin',
+                'redirect_uri' => 'http://localhost:8080/intralogin',
                     )
             )
             ->asJsonRequest(true)
@@ -248,6 +263,7 @@ class IndexController extends Controller
                 $user->password = "";
                 $user->token = $response->access_token;
                 $user->email = $result->email;
+                $user->active = 0;
 
                 $user->save();
                 $_SESSION['email'] = $result->email;

@@ -6,13 +6,6 @@
       0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
   ),
-  'laravel/tinker' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    ),
-  ),
   'ixudra/curl' => 
   array (
     'providers' => 
@@ -22,6 +15,13 @@
     'aliases' => 
     array (
       'Curl' => 'Ixudra\\Curl\\Facades\\Curl',
+    ),
+  ),
+  'laravel/tinker' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
 );

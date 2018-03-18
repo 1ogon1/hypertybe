@@ -27,7 +27,7 @@
     <input type="submit" name="Submit">
 </form>
 
-<a href="https://api.intra.42.fr/oauth/authorize?client_id=ad0570aea500deeacfb27d1cb682999daa4c43b6b171ca99ff9ea2713562d4aa&redirect_uri=http%3A%2F%2Flocalhost%3A80%2Fintralogin&response_type=code
+<a href="https://api.intra.42.fr/oauth/authorize?client_id=ad0570aea500deeacfb27d1cb682999daa4c43b6b171ca99ff9ea2713562d4aa&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fintralogin&response_type=code
 " class="btn btn-info">Intra 42 <img src="https://signin.intra.42.fr/assets/42_logo_black-684989d43d629b3c0ff6fd7e1157ee04db9bb7a73fba8ec4e01543d650a1c607.png" alt="Intra 42 logo"></a>
 
 <a href="{{$loginFb}}">Log in with Facebook!</a>

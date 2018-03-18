@@ -12,7 +12,7 @@
 */
 
 /* GET */
-Route::get('/', 'IndexController@Index');
+Route::get('/', 'MoviesController@index');
 
 Route::get('/login', 'IndexController@Login')->name('login');
 Route::get('/register', 'IndexController@Register')->name('register');
@@ -27,3 +27,10 @@ Route::get('logout', 'IndexController@logout')->name('logout');
 Route::post('signin', 'IndexController@SignIn')->name('signin');
 Route::post('signup', 'IndexController@SignUp')->name('signup');
 Route::post('update', 'IndexController@Update')->name('update');
+
+
+//Route::get('movies', 'MoviesController@index');
+
+Route::get('api/get_movies', 'MoviesController@getMovies');
+
+Route::get('parse_movies', 'MoviesController@parseMovies');
