@@ -5,9 +5,7 @@
         <p>Genre:</p>
         <select name="" id="genre">
             @foreach ($genres as $genre)
-
                 <option value="{{ $genre }}">{{ $genre }}</option>
-
             @endforeach
         </select>
     </div>
@@ -15,9 +13,7 @@
         <p>Minimal rating:</p>
         <select name="" id="minimalRating">
             @for($i = 0; $i < 10; $i++)
-
-                <option value="{{ $i }}">{{ $i }}</option>
-
+                <option value="{{ $i }}">{{ $i }}+</option>
             @endfor
         </select>
     </div>
@@ -25,9 +21,7 @@
         <p>Quality:</p>
         <select class="custom-select" name="" id="quality">
             @foreach ($qualitys as $quality)
-
                 <option value="{{ $quality }}">{{ $quality }}</option>
-
             @endforeach
         </select>
     </div>
@@ -84,27 +78,6 @@
     </ul>
     </div>
 
-    {{--@foreach($data['data']['movies'] as $movie)--}}
-        {{--<div class="col-lg-4 single-film">--}}
-            {{--<div class="row">--}}
-            {{--<div class="col-lg-3">--}}
-            {{--<a href="{{ $movie['url'] }}">--}}
-                {{--<div class="li-img">--}}
-                    {{--<img src="{{ $movie['medium_cover_image'] }}"/>--}}
-                {{--</div>--}}
-            {{--</a>--}}
-            {{--</div>--}}
-            {{--<div class="col-lg-9 li-text">--}}
-                {{--<a href="{{ $movie['url'] }}">--}}
-                    {{--<h4 class="li-head">{{ $movie['title'] }}</h4>--}}
-                {{--</a>--}}
-                {{--<p class="li-sub">{{ $movie['year'] }}</p>--}}
-                {{--<p class="li-sub">IMDb: {{ $movie['rating'] }}</p>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--@endforeach--}}
-
     {{--<ul class="pager">--}}
         {{--<li class="loader"></li>--}}
         {{--<li id="previous" class="previous"><a href="#">Previous</a></li>--}}
@@ -138,7 +111,7 @@
                 query_term: $('#input').val(),
                 page: 1
             };
-            getMovies(params);
+            getMovies(params, true);
             $('#pattern').attr('data-query_term', $('#input').val());
             return false;
         });
@@ -156,7 +129,7 @@
             $('#pattern').attr('data-quality', params.quality);
             $('#pattern').attr('data-minimum_rating', params.minimum_rating);
             $('#pattern').attr('data-genre', params.genre);
-            getMovies(params);
+            getMovies(params, true);
         });
 
         $('.sortButton').click(function () {
@@ -177,7 +150,7 @@
                 genre: $('#pattern').attr('data-genre')
             };
             $('#pattern').attr('data-sort', $(this).attr('data-sort'));
-            getMovies(params);
+            getMovies(params, true);
             return false;
         });
 
@@ -193,7 +166,7 @@
                 query_term: $('#pattern').attr('data-query_term'),
                 genre: $('#pattern').attr('data-genre')
             };
-            getMovies(params);
+            getMovies(params, false);
 //            if (params.page == $('#pattern').attr('data-page_count'))
 //                $('#next').hide();
 //            $('#previous').show();
@@ -232,10 +205,12 @@
 //            $('#next').show();
 //        });
 
-        function getMovies(params) {
+        function getMovies(params, search) {
 
             $.get('api/get_movies', params, function (data) {
-//                $('ul.list').empty();
+                if (search == true) {
+                    $('ul.list').empty();
+                }
                 $('#pattern').data('page', params.page);
                 $('#pattern').attr('data-page_count', data.data.movie_count / 12);
                 $.each(data.data.movies, function (index, value) {
