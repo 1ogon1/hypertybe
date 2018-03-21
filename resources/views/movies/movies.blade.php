@@ -1,7 +1,7 @@
 @include('layout.header')
 {{--<h4 align="center">Filter</h4>--}}
-<div class="filter">
-    <div>
+<div class="row filter">
+    <div class="col-lg-4">
         <p>Genre:</p>
         <select name="" id="genre">
             @foreach ($genres as $genre)
@@ -11,7 +11,7 @@
             @endforeach
         </select>
     </div>
-    <div>
+    <div class="col-lg-4">
         <p>Minimal rating:</p>
         <select name="" id="minimalRating">
             @for($i = 0; $i < 10; $i++)
@@ -21,9 +21,9 @@
             @endfor
         </select>
     </div>
-    <div>
+    <div class="col-lg-4">
         <p>Quality:</p>
-        <select name="" id="quality">
+        <select class="custom-select" name="" id="quality">
             @foreach ($qualitys as $quality)
 
                 <option value="{{ $quality }}">{{ $quality }}</option>
@@ -34,23 +34,32 @@
     <button id="filterButton" type="button" class="btn btn-primary">Search</button>
 </div>
 
+<div class="row">
+    <div class="col-lg-12">
 <div class="form-group">
     <div class="input-group">
         <input id="input" type="text" class="form-control" placeholder="Search film">
         <div id="search" class="input-group-addon"><a href="">Search</a></div>
     </div>
 </div>
+    </div>
+</div>
 
+<div class="row">
+    <div class="col-lg-12">
 <div class="filter">
     <p>Sort</p>
     <a class="sortButton" href="" data-sort="title">Title</a>
     <a class="sortButton" href="" data-sort="year">Year</a>
     <a class="sortButton" href="" data-sort="rating">Rating</a>
 </div>
+</div>
+</div>
 
-<div id="pattern" class="pattern" data-page="{{ $data['data']['page_number'] }}" data-sort="{{ $sort_by }}"
+<div id="pattern" class="row pattern" data-page="{{ $data['data']['page_number'] }}" data-sort="{{ $sort_by }}"
      data-page_count="{{ $page_count }}" data-order_by="desc" data-quality="All" data-minimum_rating="0"
      data-genre="All" data-query_term="0">
+    <div class="col-lg-12">
     <ul class="list img-list">
 
         @foreach ($data['data']['movies'] as $movie)
@@ -73,20 +82,56 @@
         @endforeach
 
     </ul>
+    </div>
 
-    <ul class="pager">
-        <li id="previous" class="previous"><a href="#">Previous</a></li>
-        <li id="next" class="next"><a href="#">Next</a></li>
-    </ul>
+    {{--@foreach($data['data']['movies'] as $movie)--}}
+        {{--<div class="col-lg-4 single-film">--}}
+            {{--<div class="row">--}}
+            {{--<div class="col-lg-3">--}}
+            {{--<a href="{{ $movie['url'] }}">--}}
+                {{--<div class="li-img">--}}
+                    {{--<img src="{{ $movie['medium_cover_image'] }}"/>--}}
+                {{--</div>--}}
+            {{--</a>--}}
+            {{--</div>--}}
+            {{--<div class="col-lg-9 li-text">--}}
+                {{--<a href="{{ $movie['url'] }}">--}}
+                    {{--<h4 class="li-head">{{ $movie['title'] }}</h4>--}}
+                {{--</a>--}}
+                {{--<p class="li-sub">{{ $movie['year'] }}</p>--}}
+                {{--<p class="li-sub">IMDb: {{ $movie['rating'] }}</p>--}}
+            {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--@endforeach--}}
+
+    {{--<ul class="pager">--}}
+        {{--<li class="loader"></li>--}}
+        {{--<li id="previous" class="previous"><a href="#">Previous</a></li>--}}
+        {{--<li id="next" class="next"><a href="#">Next</a></li>--}}
+    {{--</ul>--}}
+
 </div>
+<div class="row">
+    <div class="col-lg-12" style="height: 64px;">
+        <div class="loader"></div>
+    </div>
+</div>
+    <a href="#top" class="to-top"></a>
 
 @include('layout.footer')
 
 <script>
+//    $(document).onload().scrollTop(0);
     $(document).ready(function () {
+        $(this).scrollTop(0);
+//        if ($('#pattern').attr('data-page') == 1)
+//            $('#previous').hide();
 
-        if ($('#pattern').attr('data-page') == 1)
-            $('#previous').hide();
+        $("a[href='#top']").click(function() {
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return false;
+        });
 
         $('#search').click(function () {
             var params = {
@@ -107,7 +152,7 @@
                 page: 1
             };
             $('#pattern').attr('data-sort', 'title');
-            $('#previous').hide();
+//            $('#previous').hide();
             $('#pattern').attr('data-quality', params.quality);
             $('#pattern').attr('data-minimum_rating', params.minimum_rating);
             $('#pattern').attr('data-genre', params.genre);
@@ -136,7 +181,8 @@
             return false;
         });
 
-        $('#next').on('click', function () {
+//        $('#next').on('click', function () {
+        function nextPage() {
 
             var params = {
                 page: parseInt($('#pattern').attr('data-page')) + 1,
@@ -148,32 +194,48 @@
                 genre: $('#pattern').attr('data-genre')
             };
             getMovies(params);
-            if (params.page == $('#pattern').attr('data-page_count'))
-                $('#next').hide();
-            $('#previous').show();
-            $('#previous').show();
+//            if (params.page == $('#pattern').attr('data-page_count'))
+//                $('#next').hide();
+//            $('#previous').show();
+//            $('#previous').show();
+        }
+//        });
+
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 300){
+                $('.to-top').css('display', 'block');
+            }
+            else {
+                $('.to-top').css('display', 'none');
+
+            }
+
+            if($(window).scrollTop() + $(window).height() == $(document).height()) {
+                $('.loader').css('display', 'block');
+                nextPage();
+            }
         });
 
-        $('#previous').click(function () {
-            var params = {
-                page: parseInt($('#pattern').attr('data-page')) - 1,
-                sort: $('#pattern').attr('data-sort'),
-                order_by: $('#pattern').attr('data-order_by'),
-                quality: $('#pattern').attr('data-quality'),
-                minimum_rating: $('#pattern').attr('data-minimum_rating'),
-                query_term: $('#pattern').attr('data-query_term'),
-                genre: $('#pattern').attr('data-genre')
-            };
-            getMovies(params);
-            if (params.page == 1)
-                $('#previous').hide();
-            $('#next').show();
-        });
+//        $('#previous').click(function () {
+//            var params = {
+//                page: parseInt($('#pattern').attr('data-page')) - 1,
+//                sort: $('#pattern').attr('data-sort'),
+//                order_by: $('#pattern').attr('data-order_by'),
+//                quality: $('#pattern').attr('data-quality'),
+//                minimum_rating: $('#pattern').attr('data-minimum_rating'),
+//                query_term: $('#pattern').attr('data-query_term'),
+//                genre: $('#pattern').attr('data-genre')
+//            };
+//            getMovies(params);
+//            if (params.page == 1)
+//                $('#previous').hide();
+//            $('#next').show();
+//        });
 
         function getMovies(params) {
 
             $.get('api/get_movies', params, function (data) {
-                $('ul.list').empty();
+//                $('ul.list').empty();
                 $('#pattern').data('page', params.page);
                 $('#pattern').attr('data-page_count', data.data.movie_count / 12);
                 $.each(data.data.movies, function (index, value) {
@@ -193,13 +255,14 @@
                         "            </li>");
                     $('#pattern').attr('data-page', params.page);
                 });
-                if (parseInt($('#pattern').attr('data-page_count')) < parseInt($('#pattern').attr('data-page')))
-                    $('#next').hide();
-                else
-                    $('#next').show();
+                $('.loader').css('display', 'none');
+//                if (parseInt($('#pattern').attr('data-page_count')) < parseInt($('#pattern').attr('data-page')))
+//                    $('#next').hide();
+//                else
+//                    $('#next').show();
             });
-            if (params.page == 1)
-                $('#previous').hide();
+//            if (params.page == 1)
+//                $('#previous').hide();
         }
 
     })

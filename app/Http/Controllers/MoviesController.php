@@ -20,7 +20,7 @@ class MoviesController extends Controller
 
     public function index()
     {
-        if (!isset($_SESSION['email']) && $_SESSION['user_id'] != 0) {
+        if (!isset($_SESSION['email']) && !isset($_SESSION['user_id'])) {// && $_SESSION['user_id'] != 0) {
             return redirect('/login/')->with('warning', 'Please login first!');
         }
         $user = DB::table('users')->where('id', $_SESSION['user_id'])->first();

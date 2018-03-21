@@ -8,11 +8,17 @@
     height: 100%;
 }
 
+.list a {
+    display: block;
+}
+
 .list li {
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #ccc;
     display: table;
     border-collapse: collapse;
     width: 100%;
+    margin: 0 10px 10px 0;
+    /*border: 1px solid grey;*/
 }
 
 .li-img {
@@ -56,23 +62,24 @@
 
 @media all and (min-width: 75em) {
     .list li {
-        width: 33.33333%;
+        width: 32.33333%;
     }
 }
 
 /*  HEADER  */
 
 .header-fixed {
-    background-color:#292c2f;
-    box-shadow:0 1px 1px #ccc;
+    background-color: #292c2f;
+    box-shadow: 0 1px 1px #ccc;
     padding: 20px 40px;
     height: 96px;
     color: #ffffff;
     box-sizing: border-box;
-    top:-100px;
+    top: -100px;
+    margin-bottom: 15px;
 
-    -webkit-transition:top 0.3s;
-    transition:top 0.3s;
+    -webkit-transition: top 0.3s;
+    transition: top 0.3s;
 }
 
 .header-fixed .header-limiter {
@@ -84,7 +91,7 @@
 /*	The header placeholder. It is displayed when the header is fixed to the top of the
 	browser window, in order to prevent the content of the page from jumping up. */
 
-.header-fixed-placeholder{
+.header-fixed-placeholder {
     height: 80px;
     display: none;
 }
@@ -110,20 +117,20 @@
 }
 
 .header-fixed .header-limiter nav {
-    font:16px Arial, Helvetica, sans-serif;
+    font: 16px Arial, Helvetica, sans-serif;
     line-height: 54px;
     float: right;
 }
 
-.header-fixed .header-limiter nav a{
+.header-fixed .header-limiter nav a {
     display: inline-block;
     padding: 0 5px;
-    text-decoration:none;
+    text-decoration: none;
     color: #ffffff;
     opacity: 0.9;
 }
 
-.header-fixed .header-limiter nav a:hover{
+.header-fixed .header-limiter nav a:hover {
     opacity: 1;
 }
 
@@ -159,7 +166,6 @@ body.fixed .header-fixed .header-limiter nav {
     font-size: 13px;
 }
 
-
 /* Making the header responsive */
 
 @media all and (max-width: 600px) {
@@ -179,7 +185,7 @@ body.fixed .header-fixed .header-limiter nav {
 
     .header-fixed .header-limiter nav {
         line-height: 1;
-        float:none;
+        float: none;
     }
 
     .header-fixed .header-limiter nav a {
@@ -193,7 +199,7 @@ body.fixed .header-fixed .header-limiter nav {
 }
 
 /* FOOTER */
-.footer-basic-centered{
+.footer-basic-centered {
     background-color: #292c2f;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
@@ -205,14 +211,14 @@ body.fixed .header-fixed .header-limiter nav {
     bottom: 0;
 }
 
-.footer-basic-centered .footer-company-motto{
-    color:  #8d9093;
+.footer-basic-centered .footer-company-motto {
+    color: #8d9093;
     font-size: 24px;
     margin: 0;
 }
 
-.footer-basic-centered .footer-company-name{
-    color:  #8f9296;
+.footer-basic-centered .footer-company-name {
+    color: #8f9296;
     font-size: 14px;
     margin: 0;
 }
@@ -221,16 +227,103 @@ body.fixed .header-fixed .header-limiter nav {
 
 @media (max-width: 600px) {
 
-    .footer-basic-centered{
+    .footer-basic-centered {
         padding: 35px;
     }
 
-    .footer-basic-centered .footer-company-motto{
+    .footer-basic-centered .footer-company-motto {
         font-size: 18px;
     }
 
-    .footer-basic-centered .footer-company-name{
+    .footer-basic-centered .footer-company-name {
         font-size: 12px;
     }
 
+}
+
+/* Ruslan style */
+.btn-primary {
+    background-color: #000000;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #2a2a2a;
+}
+
+div.login-with {
+    margin-top: 15px;
+}
+
+div.login-with a {
+    background: none;
+    border: none;
+
+}
+div.login-with a img {
+    width: 50px;
+}
+
+div.login-with span.intra {
+    margin-right: 20px;
+}
+
+div.login-with span.fb a img {
+    width: 36px;
+}
+
+div.login-with a:hover {
+    border: #000000;
+}
+div.input-group {
+    margin: 0;
+    width: 100%;
+}
+
+/* LOADER */
+.loader {
+    position: relative;
+    bottom: 0;
+    display: none;
+    border: 7px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 7px solid #5a5a5a;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin-left: 43%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.to-top {
+    display: none;
+    opacity: 0.4;
+    width: 60px;
+    height: 60px;
+    right: 30px;
+    bottom: 50px;
+    padding: 5px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 99999999;
+    border-radius: 5px;
+    transition: all 1s;
+    /*background-color: #64a6da;*/
+    background-image: url("/public/image/totop.png");
+    background-size: 60px 60px;
+}
+
+.to-top:hover {
+    opacity: 1;
 }

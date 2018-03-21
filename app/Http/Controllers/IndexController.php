@@ -16,17 +16,9 @@ use PDOException;
 
 class IndexController extends Controller
 {
-    public $pdo;
     public function __construct()
     {
         session_start();
-        try {
-            $this->pdo = new \PDO("mysql:host=localhost;dbname=hypertube", "root", "111111");
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch (PDOException $e) {
-            echo 'Connection failed: '. $e->getMessage();
-        }
     }
 
     public function Index()
@@ -49,9 +41,12 @@ class IndexController extends Controller
 
         ]);
         $helper = $fb->getRedirectLoginHelper();
-        $loginFb = $helper->getLoginUrl('http://localhost:8080/facebooklogin');
+        $loginFb = $helper->getLoginUrl('http://localhost:80/facebooklogin');
 
-        return view('user.login')->with('loginFb', $loginFb);
+        return view('user.login')->with([
+            'loginFb' => $loginFb,
+            'title' => $title
+        ]);
     }
 
     public function SignIn()
@@ -67,7 +62,7 @@ class IndexController extends Controller
                     if ($user->active == 1) {
                         $_SESSION['email'] = $user->email;
                         $_SESSION['user_id'] = $user->id;
-                        return redirect('/profile/' . $user->id . '');
+                        return redirect('/');
                     }
                     else{
                         return redirect('/login/')->with('warning', 'Activate account first');
@@ -86,7 +81,7 @@ class IndexController extends Controller
 
     public function Register()
     {
-        return view('user.register');
+        return view('user.register')->with('title', 'Registration');
     }
 
     public function SignUp()
@@ -120,13 +115,13 @@ class IndexController extends Controller
 //                    Mail::raw($subject, function ($message) {
 //                        $message->to($_POST['email']);
 //                    });
-                    return redirect('/login/')->with('success', 'Please check you email');
+                    return redirect('/login/')->with('info', 'Please check you email');
                 } else {
                     return redirect('/register/')->with('error', 'Something wrong! User not saved! Sorry :(');
                 }
 
             } else {
-                return redirect('/register/')->with('error', "user with email " . $_POST['email'] . " already exists");
+                return redirect('/register/')->with('error', "User with email <strong>" . $_POST['email'] . "</strong> already exists!");
             }
         }
     }
@@ -144,7 +139,7 @@ class IndexController extends Controller
             $helper->getPersistentDataHandler()->set('state', $_GET['state']);
         }
         try {
-            $accessToken = $helper->getAccessToken('http://localhost:8080/facebooklogin');
+            $accessToken = $helper->getAccessToken('http://localhost:80/facebooklogin');
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -215,7 +210,7 @@ class IndexController extends Controller
 
             $_SESSION['email'] = $profile['email'];
             $_SESSION['user_id'] = $user->id;
-            return redirect('/profile/'.$user->id.'');
+            return redirect('/');
         }
         else
         {
@@ -227,7 +222,7 @@ class IndexController extends Controller
             }
             $_SESSION['email'] = $profile['email'];
             $_SESSION['user_id'] = $db_user->id;
-            return redirect('/profile/'.$db_user->id.'');
+            return redirect('/');
         }
 
     }
@@ -268,7 +263,7 @@ class IndexController extends Controller
                 $user->save();
                 $_SESSION['email'] = $result->email;
                 $_SESSION['user_id'] = $user->id;
-                return redirect('/profile/'.$user->id.'');
+                return redirect('/');
             }
             else {
                 $_SESSION['email'] = $result->email;
@@ -323,7 +318,8 @@ class IndexController extends Controller
     public function logout()
     {
         unset($_SESSION['email']);
-        return redirect('/');
+        unset($_SESSION['user_id']);
+        return redirect('/login');
     }
 
     public function profile($id = 0)
@@ -333,6 +329,9 @@ class IndexController extends Controller
         }
         $user = DB::table('users')->where('id', $id)->first();
 
-        return View('user.profile')->with(['user' => $user]);
+        return View('user.profile')->with([
+            'user' => $user,
+            'title' => 'Profile'
+        ]);
     }
 }
