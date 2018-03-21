@@ -30,58 +30,54 @@
 
 <div class="row">
     <div class="col-lg-12">
-<div class="form-group">
-    <div class="input-group">
-        <input id="input" type="text" class="form-control" placeholder="Search film">
-        <div id="search" class="input-group-addon"><a href="">Search</a></div>
-    </div>
-</div>
+        <div class="form-group">
+            <div class="input-group">
+                <input id="input" type="text" class="form-control" placeholder="Search film">
+                <div id="search" class="input-group-addon"><a href="">Search</a></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
-<div class="filter">
-    <p>Sort</p>
-    <a class="sortButton" href="" data-sort="title">Title</a>
-    <a class="sortButton" href="" data-sort="year">Year</a>
-    <a class="sortButton" href="" data-sort="rating">Rating</a>
-</div>
-</div>
+        <div class="filter">
+            <p>Sort</p>
+            <a class="sortButton" href="" data-sort="title">Title</a>
+            <a class="sortButton" href="" data-sort="year">Year</a>
+            <a class="sortButton" href="" data-sort="rating">Rating</a>
+        </div>
+    </div>
 </div>
 
 <div id="pattern" class="row pattern" data-page="{{ $data['data']['page_number'] }}" data-sort="{{ $sort_by }}"
      data-page_count="{{ $page_count }}" data-order_by="desc" data-quality="All" data-minimum_rating="0"
      data-genre="All" data-query_term="0">
     <div class="col-lg-12">
-    <ul class="list img-list">
-
-        @foreach ($data['data']['movies'] as $movie)
-
-            <li>
-                <a href="{{ $movie['url'] }}">
+        <ul class="list img-list">
+            @foreach ($data['data']['movies'] as $movie)
+                <li>
                     <div class="li-img">
-                        <img src="{{ $movie['medium_cover_image'] }}"/>
+                        <a href="{{ $movie['url'] }}">
+                            <img src="{{ $movie['medium_cover_image'] }}"/>
+                        </a>
                     </div>
-                </a>
-                <div class="li-text">
-                    <a href="{{ $movie['url'] }}">
-                        <h4 class="li-head">{{ $movie['title'] }}</h4>
-                    </a>
-                    <p class="li-sub">{{ $movie['year'] }}</p>
-                    <p class="li-sub">IMDb: {{ $movie['rating'] }}</p>
-                </div>
-            </li>
-
-        @endforeach
-
-    </ul>
+                    <div class="li-text">
+                        <a href="{{ $movie['url'] }}">
+                            <h4 class="li-head">{{ $movie['title'] }}</h4>
+                        </a>
+                        <p class="li-sub">{{ $movie['year'] }}</p>
+                        <p class="li-sub">IMDb: {{ $movie['rating'] }}</p>
+                    </div>
+                </li>
+            @endforeach
+        </ul>
     </div>
 
     {{--<ul class="pager">--}}
-        {{--<li class="loader"></li>--}}
-        {{--<li id="previous" class="previous"><a href="#">Previous</a></li>--}}
-        {{--<li id="next" class="next"><a href="#">Next</a></li>--}}
+    {{--<li class="loader"></li>--}}
+    {{--<li id="previous" class="previous"><a href="#">Previous</a></li>--}}
+    {{--<li id="next" class="next"><a href="#">Next</a></li>--}}
     {{--</ul>--}}
 
 </div>
@@ -90,19 +86,19 @@
         <div class="loader"></div>
     </div>
 </div>
-    <a href="#top" class="to-top"></a>
+<a href="#top" class="to-top"></a>
 
 @include('layout.footer')
 
 <script>
-//    $(document).onload().scrollTop(0);
+    //    $(document).onload().scrollTop(0);
     $(document).ready(function () {
         $(this).scrollTop(0);
 //        if ($('#pattern').attr('data-page') == 1)
 //            $('#previous').hide();
 
-        $("a[href='#top']").click(function() {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("a[href='#top']").click(function () {
+            $("html, body").animate({scrollTop: 0}, "slow");
             return false;
         });
 
@@ -172,10 +168,11 @@
 //            $('#previous').show();
 //            $('#previous').show();
         }
+
 //        });
 
-        $(window).scroll(function() {
-            if ($(window).scrollTop() > 300){
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
                 $('.to-top').css('display', 'block');
             }
             else {
@@ -183,7 +180,7 @@
 
             }
 
-            if($(window).scrollTop() + $(window).height() == $(document).height()) {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
                 $('.loader').css('display', 'block');
                 nextPage();
             }

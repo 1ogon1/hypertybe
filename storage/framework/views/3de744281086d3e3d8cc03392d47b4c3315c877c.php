@@ -30,58 +30,54 @@
 
 <div class="row">
     <div class="col-lg-12">
-<div class="form-group">
-    <div class="input-group">
-        <input id="input" type="text" class="form-control" placeholder="Search film">
-        <div id="search" class="input-group-addon"><a href="">Search</a></div>
-    </div>
-</div>
+        <div class="form-group">
+            <div class="input-group">
+                <input id="input" type="text" class="form-control" placeholder="Search film">
+                <div id="search" class="input-group-addon"><a href="">Search</a></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
-<div class="filter">
-    <p>Sort</p>
-    <a class="sortButton" href="" data-sort="title">Title</a>
-    <a class="sortButton" href="" data-sort="year">Year</a>
-    <a class="sortButton" href="" data-sort="rating">Rating</a>
-</div>
-</div>
+        <div class="filter">
+            <p>Sort</p>
+            <a class="sortButton" href="" data-sort="title">Title</a>
+            <a class="sortButton" href="" data-sort="year">Year</a>
+            <a class="sortButton" href="" data-sort="rating">Rating</a>
+        </div>
+    </div>
 </div>
 
 <div id="pattern" class="row pattern" data-page="<?php echo e($data['data']['page_number']); ?>" data-sort="<?php echo e($sort_by); ?>"
      data-page_count="<?php echo e($page_count); ?>" data-order_by="desc" data-quality="All" data-minimum_rating="0"
      data-genre="All" data-query_term="0">
     <div class="col-lg-12">
-    <ul class="list img-list">
-
-        <?php $__currentLoopData = $data['data']['movies']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-            <li>
-                <a href="<?php echo e($movie['url']); ?>">
+        <ul class="list img-list">
+            <?php $__currentLoopData = $data['data']['movies']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li>
                     <div class="li-img">
-                        <img src="<?php echo e($movie['medium_cover_image']); ?>"/>
+                        <a href="<?php echo e($movie['url']); ?>">
+                            <img src="<?php echo e($movie['medium_cover_image']); ?>"/>
+                        </a>
                     </div>
-                </a>
-                <div class="li-text">
-                    <a href="<?php echo e($movie['url']); ?>">
-                        <h4 class="li-head"><?php echo e($movie['title']); ?></h4>
-                    </a>
-                    <p class="li-sub"><?php echo e($movie['year']); ?></p>
-                    <p class="li-sub">IMDb: <?php echo e($movie['rating']); ?></p>
-                </div>
-            </li>
-
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-    </ul>
+                    <div class="li-text">
+                        <a href="<?php echo e($movie['url']); ?>">
+                            <h4 class="li-head"><?php echo e($movie['title']); ?></h4>
+                        </a>
+                        <p class="li-sub"><?php echo e($movie['year']); ?></p>
+                        <p class="li-sub">IMDb: <?php echo e($movie['rating']); ?></p>
+                    </div>
+                </li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </ul>
     </div>
 
     
-        
-        
-        
+    
+    
+    
     
 
 </div>
@@ -90,19 +86,19 @@
         <div class="loader"></div>
     </div>
 </div>
-    <a href="#top" class="to-top"></a>
+<a href="#top" class="to-top"></a>
 
 <?php echo $__env->make('layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <script>
-//    $(document).onload().scrollTop(0);
+    //    $(document).onload().scrollTop(0);
     $(document).ready(function () {
         $(this).scrollTop(0);
 //        if ($('#pattern').attr('data-page') == 1)
 //            $('#previous').hide();
 
-        $("a[href='#top']").click(function() {
-            $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("a[href='#top']").click(function () {
+            $("html, body").animate({scrollTop: 0}, "slow");
             return false;
         });
 
@@ -172,10 +168,11 @@
 //            $('#previous').show();
 //            $('#previous').show();
         }
+
 //        });
 
-        $(window).scroll(function() {
-            if ($(window).scrollTop() > 300){
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
                 $('.to-top').css('display', 'block');
             }
             else {
@@ -183,7 +180,7 @@
 
             }
 
-            if($(window).scrollTop() + $(window).height() == $(document).height()) {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
                 $('.loader').css('display', 'block');
                 nextPage();
             }
