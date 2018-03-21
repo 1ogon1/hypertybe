@@ -5,9 +5,7 @@
         <p>Genre:</p>
         <select name="" id="genre">
             <?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
                 <option value="<?php echo e($genre); ?>"><?php echo e($genre); ?></option>
-
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </select>
     </div>
@@ -15,9 +13,7 @@
         <p>Minimal rating:</p>
         <select name="" id="minimalRating">
             <?php for($i = 0; $i < 10; $i++): ?>
-
-                <option value="<?php echo e($i); ?>"><?php echo e($i); ?></option>
-
+                <option value="<?php echo e($i); ?>"><?php echo e($i); ?>+</option>
             <?php endfor; ?>
         </select>
     </div>
@@ -25,9 +21,7 @@
         <p>Quality:</p>
         <select class="custom-select" name="" id="quality">
             <?php $__currentLoopData = $qualitys; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $quality): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
                 <option value="<?php echo e($quality); ?>"><?php echo e($quality); ?></option>
-
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </select>
     </div>
@@ -86,27 +80,6 @@
 
     
         
-            
-            
-            
-                
-                    
-                
-            
-            
-            
-                
-                    
-                
-                
-                
-            
-            
-        
-    
-
-    
-        
         
         
     
@@ -138,16 +111,16 @@
                 query_term: $('#input').val(),
                 page: 1
             };
-            getMovies(params);
+            getMovies(params, true);
             $('#pattern').attr('data-query_term', $('#input').val());
             return false;
         });
 
         $('#filterButton').click(function () {
             var params = {
-                quality: $('#quality option:selected').text(),
-                minimum_rating: $('#minimalRating option:selected').text(),
-                genre: $('#genre option:selected').text(),
+                quality: $('#quality option:selected').val(),
+                minimum_rating: $('#minimalRating option:selected').val(),
+                genre: $('#genre option:selected').val(),
                 query_term: $('#pattern').attr('data-query_term'),
                 page: 1
             };
@@ -156,7 +129,7 @@
             $('#pattern').attr('data-quality', params.quality);
             $('#pattern').attr('data-minimum_rating', params.minimum_rating);
             $('#pattern').attr('data-genre', params.genre);
-            getMovies(params);
+            getMovies(params, true);
         });
 
         $('.sortButton').click(function () {
@@ -177,7 +150,7 @@
                 genre: $('#pattern').attr('data-genre')
             };
             $('#pattern').attr('data-sort', $(this).attr('data-sort'));
-            getMovies(params);
+            getMovies(params, true);
             return false;
         });
 
@@ -193,7 +166,7 @@
                 query_term: $('#pattern').attr('data-query_term'),
                 genre: $('#pattern').attr('data-genre')
             };
-            getMovies(params);
+            getMovies(params, false);
 //            if (params.page == $('#pattern').attr('data-page_count'))
 //                $('#next').hide();
 //            $('#previous').show();
@@ -232,10 +205,12 @@
 //            $('#next').show();
 //        });
 
-        function getMovies(params) {
+        function getMovies(params, search) {
 
             $.get('api/get_movies', params, function (data) {
-//                $('ul.list').empty();
+                if (search == true) {
+                    $('ul.list').empty();
+                }
                 $('#pattern').data('page', params.page);
                 $('#pattern').attr('data-page_count', data.data.movie_count / 12);
                 $.each(data.data.movies, function (index, value) {

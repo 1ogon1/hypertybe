@@ -118,9 +118,9 @@
 
         $('#filterButton').click(function () {
             var params = {
-                quality: $('#quality option:selected').text(),
-                minimum_rating: $('#minimalRating option:selected').text(),
-                genre: $('#genre option:selected').text(),
+                quality: $('#quality option:selected').val(),
+                minimum_rating: $('#minimalRating option:selected').val(),
+                genre: $('#genre option:selected').val(),
                 query_term: $('#pattern').attr('data-query_term'),
                 page: 1
             };
