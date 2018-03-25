@@ -58,12 +58,12 @@
             <?php $__currentLoopData = $data['data']['movies']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <li>
                     <div class="li-img">
-                        <a href="<?php echo e($movie['url']); ?>">
+                        <a href="movies/<?php echo e($movie['id']); ?>">
                             <img src="<?php echo e($movie['medium_cover_image']); ?>"/>
                         </a>
                     </div>
                     <div class="li-text">
-                        <a href="<?php echo e($movie['url']); ?>">
+                        <a href="movies/<?php echo e($movie['id']); ?>">
                             <h4 class="li-head"><?php echo e($movie['title']); ?></h4>
                         </a>
                         <p class="li-sub"><?php echo e($movie['year']); ?></p>
@@ -212,13 +212,13 @@
                 $('#pattern').attr('data-page_count', data.data.movie_count / 12);
                 $.each(data.data.movies, function (index, value) {
                     $('ul.list').append("            <li>\n" +
-                        "                <a href=\"" + value.url + "/" + value.id + "\">\n" +
+                        "                <a href=\"movies/" + value.id + "\">\n" +
                         "                    <div class=\"li-img\">\n" +
                         "                        <img src=\"" + value.medium_cover_image + "\" />\n" +
                         "                    </div>\n" +
                         "                </a>\n" +
                         "                    <div class=\"li-text\">\n" +
-                        "                        <a href=\"" + value.url + "\">\n" +
+                        "                        <a href=\"movies/" + value.id + "\">\n" +
                         "                            <h4 class=\"li-head\">" + value.title + "</h4>\n" +
                         "                        </a>\n" +
                         "                        <p class=\"li-sub\">" + value.year + "</p>\n" +

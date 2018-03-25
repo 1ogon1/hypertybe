@@ -41,7 +41,7 @@ class IndexController extends Controller
 
         ]);
         $helper = $fb->getRedirectLoginHelper();
-        $loginFb = $helper->getLoginUrl('http://localhost:80/facebooklogin');
+        $loginFb = $helper->getLoginUrl('http://localhost:8080/facebooklogin');
 
         return view('user.login')->with([
             'loginFb' => $loginFb,
@@ -139,7 +139,7 @@ class IndexController extends Controller
             $helper->getPersistentDataHandler()->set('state', $_GET['state']);
         }
         try {
-            $accessToken = $helper->getAccessToken('http://localhost:80/facebooklogin');
+            $accessToken = $helper->getAccessToken('http://localhost:8080/facebooklogin');
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;

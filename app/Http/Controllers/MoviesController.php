@@ -102,4 +102,19 @@ class MoviesController extends Controller
         $data = \GuzzleHttp\json_decode($json, true);
         return $data;
     }
+
+    public function movieInfo($id)
+    {
+        $client = new Client(); //GuzzleHttp\Client
+        $json = $client->get('https://yts.am/api/v2/movie_details.json?movie_id=' . $id . '&with_images=true&with_cast=true')->getBody();
+
+        $data = \GuzzleHttp\json_decode($json, true);
+
+        $movieInfo = $data['data']['movie'];
+
+        return view('movies.movieInfo')->with([
+            'movieInfo' => $movieInfo,
+            'title' => $movieInfo['title_english']
+        ]);
+    }
 }
