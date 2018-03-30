@@ -1,85 +1,134 @@
 @include('layout.header')
-    {{--<link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>--}}
-    {{--<script src="http://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>--}}
-    {{--<script src="http://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>--}}
 
-    {{--<style type="text/css">--}}
-
-
-    {{--</style>--}}
-
-    <div class="container">
-        <div id="main">
-
-
-            <div class="row" id="real-estates-detail">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <header class="panel-title">
-                                <div class="text-center">
-                                    <strong>Movie</strong>
-                                </div>
-                            </header>
+<div class="row" id="real-estates-detail">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <header class="panel-title">
+                    <div class="text-center">
+                        <strong>{{ $movieInfo['title_english'] }}</strong>
+                    </div>
+                </header>
+            </div>
+            <div class="panel-body">
+                <div class="text-center" id="author">
+                    <img id="profilePhoto" src="{{ $movieInfo['large_cover_image'] }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <header class="panel-title">
+                    <div class="text-center">
+                        <strong>Детально</strong>
+                    </div>
+                </header>
+            </div>
+            <div class="panel-body">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="detail">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-2">
+                                <b>Жанр:</b>
+                            </div>
+                            <div class="col-sm-10 col-xs-10">
+                                <p>
+                                    @foreach($movieInfo['genres'] as $genre)
+                                        <span>
+                                            {{$genre}}
+                                        </span>
+                                    @endforeach
+                                </p>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <div class="text-center" id="author">
-                                <img id="profilePhoto"
-                                     src="{{ $movieInfo['large_cover_image'] }}">
-
-                                <h3>{{ $movieInfo['title_english'] }}</h3>
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-2">
+                                <b>Описание:</b>
+                            </div>
+                            <div class="col-sm-10 col-xs-10">
+                                <p>{{ $movieInfo['description_full'] }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-2">
+                                <b>Год:</b>
+                            </div>
+                            <div class="col-sm-10 col-xs-10">
                                 <p>{{ $movieInfo['year'] }}</p>
-                                <p>IMDb:
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-2">
+                                <b>IMDb:
+                                </b>
+                            </div>
+                            <div class="col-sm-10 col-xs-10">
+                                <p>
                                     <small class="label label-warning"><?php echo $movieInfo['rating'] ?></small>
                                 </p>
-
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-xs-12">
-                    <div class="panel">
-                        <div class="panel-body">
-
-                            <div id="myTabContent" class="tab-content">
-                                <hr>
-                                <div class="tab-pane fade active in" id="detail">
-                                    <!-- <h4>Movie information</h4> -->
-                                    <table class="table">
-                                        <tr>
-                                        <th>Genres</th>
-                                            @foreach ($movieInfo['genres'] as $genre)
-
-                                            <td>{{ $genre }}</td>
-
-                                            @endforeach
-                                        </tr>
-                                        <tr>
-                                            <th>Synopsis</th>
-                                            <td>{{ $movieInfo['description_full'] }}</td>
-                                        </tr>
-                                    </table>
-                                    <h4>Torrents</h4>
-                                        <table class="table">
-                                        @foreach ($movieInfo['torrents'] as $torrent)
-
-                                        <tr>
-                                            <th><a href="{{ $torrent['url'] }}">{{ $torrent['quality'] }}</a></th>
-                                            <td>Size: {{ $torrent['size'] }}</td>
-                                        </tr>
-
-                                        @endforeach
-                                    </table>
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>
+                                    <b>
+                                        Скачать:
+                                    </b>
+                                </p>
                             </div>
+                            @foreach ($movieInfo['torrents'] as $torrent)
+                                <div class="col-sm-2 col-xs-2 bottom">
+                                    <a href="{{ $torrent['url'] }}">
+                                        {{ $torrent['quality'] }}
+                                    </a>
+                                </div>
+                                <div class="col-sm-10 col-xs-10 bottom">
+                                    Объем: {{ $torrent['size'] }}
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
+        <div class="comment-list" id="comments">
+            @foreach($comments as $comment)
+                <div class="comment-block">
+                    <div class="comment-name">
+                        <a href="/profile/{{$comment->user_id}}">
+                            {{$comment->name}} {{ $comment->surname }}
+                        </a>
+                        <span>
+                                {{ $comment->created_at }}
+                            </span>
+                    </div>
+                    <div class="comment-text">
+                        {{$comment->comment}}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="panel panel-form">
+            <div class="panel-body">
+                <div {{--action="{{ route('addcomment') }}" method="post"--}}>
+                    <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" id="movie_id" name="movie_id" value="{{ $movieInfo['id']  }}">
+                    <div class="form-group">
+                        <label for="comment">Оставить коментарий</label>
+                        <textarea class="form-control" rows="5" draggable="false" id="comment"
+                                  name="comment"></textarea>
+                    </div>
+                    <button type="submit" id="comment_btn" class="btn btn-primary">Отправить</button>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-
+</div>
 @include('layout.footer')
+<script src="{{URL::asset('js/movieinfo.js')}}" type="text/javascript"></script>

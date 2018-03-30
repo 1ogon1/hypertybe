@@ -1,32 +1,33 @@
 $(document).ready(function () {
-
-    if ($('#pattern').attr('data-page') == 1)
-        $('#previous').hide();
+    $(this).scrollTop(0);
+    $("a[href='#top']").click(function () {
+        $("html, body").animate({scrollTop: 0}, "slow");
+        return false;
+    });
 
     $('#search').click(function () {
         var params = {
             query_term: $('#input').val(),
             page: 1
         };
-        getMovies(params);
+        getMovies(params, true);
         $('#pattern').attr('data-query_term', $('#input').val());
         return false;
     });
 
     $('#filterButton').click(function () {
         var params = {
-            quality: $('#quality option:selected').text(),
-            minimum_rating: $('#minimalRating option:selected').text(),
-            genre: $('#genre option:selected').text(),
+            quality: $('#quality option:selected').val(),
+            minimum_rating: $('#minimalRating option:selected').val(),
+            genre: $('#genre option:selected').val(),
             query_term: $('#pattern').attr('data-query_term'),
             page: 1
         };
         $('#pattern').attr('data-sort', 'title');
-        $('#previous').hide();
         $('#pattern').attr('data-quality', params.quality);
         $('#pattern').attr('data-minimum_rating', params.minimum_rating);
         $('#pattern').attr('data-genre', params.genre);
-        getMovies(params);
+        getMovies(params, true);
     });
 
     $('.sortButton').click(function () {
@@ -47,11 +48,11 @@ $(document).ready(function () {
             genre: $('#pattern').attr('data-genre')
         };
         $('#pattern').attr('data-sort', $(this).attr('data-sort'));
-        getMovies(params);
+        getMovies(params, true);
         return false;
     });
 
-    $('#next').on('click', function () {
+    function nextPage() {
 
         var params = {
             page: parseInt($('#pattern').attr('data-page')) + 1,
@@ -62,44 +63,41 @@ $(document).ready(function () {
             query_term: $('#pattern').attr('data-query_term'),
             genre: $('#pattern').attr('data-genre')
         };
-        getMovies(params);
-        if (params.page == $('#pattern').attr('data-page_count'))
-            $('#next').hide();
-        $('#previous').show();
-        $('#previous').show();
+        getMovies(params, false);
+    }
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            $('.to-top').css('display', 'block');
+        }
+        else {
+            $('.to-top').css('display', 'none');
+
+        }
+
+        if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+            $('.loader').css('display', 'block');
+            nextPage();
+        }
     });
 
-    $('#previous').click(function () {
-        var params = {
-            page: parseInt($('#pattern').attr('data-page')) - 1,
-            sort: $('#pattern').attr('data-sort'),
-            order_by: $('#pattern').attr('data-order_by'),
-            quality: $('#pattern').attr('data-quality'),
-            minimum_rating: $('#pattern').attr('data-minimum_rating'),
-            query_term: $('#pattern').attr('data-query_term'),
-            genre: $('#pattern').attr('data-genre')
-        };
-        getMovies(params);
-        if (params.page == 1)
-            $('#previous').hide();
-        $('#next').show();
-    });
-
-    function getMovies(params) {
+    function getMovies(params, search) {
 
         $.get('api/get_movies', params, function (data) {
-            $('ul.list').empty();
+            if (search == true) {
+                $('ul.list').empty();
+            }
             $('#pattern').data('page', params.page);
             $('#pattern').attr('data-page_count', data.data.movie_count / 12);
             $.each(data.data.movies, function (index, value) {
                 $('ul.list').append("            <li>\n" +
-                    "                <a href=\"" + value.url + "/" + value.id + "\">\n" +
+                    "                <a href=\"movies/" + value.id + "\">\n" +
                     "                    <div class=\"li-img\">\n" +
                     "                        <img src=\"" + value.medium_cover_image + "\" />\n" +
                     "                    </div>\n" +
                     "                </a>\n" +
                     "                    <div class=\"li-text\">\n" +
-                    "                        <a href=\"" + value.url + "\">\n" +
+                    "                        <a href=\"movies/" + value.id + "\">\n" +
                     "                            <h4 class=\"li-head\">" + value.title + "</h4>\n" +
                     "                        </a>\n" +
                     "                        <p class=\"li-sub\">" + value.year + "</p>\n" +
@@ -108,13 +106,8 @@ $(document).ready(function () {
                     "            </li>");
                 $('#pattern').attr('data-page', params.page);
             });
-            if (parseInt($('#pattern').attr('data-page_count')) < parseInt($('#pattern').attr('data-page')))
-                $('#next').hide();
-            else
-                $('#next').show();
+            $('.loader').css('display', 'none');
         });
-        if (params.page == 1)
-            $('#previous').hide();
     }
 
-})
+});

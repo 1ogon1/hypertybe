@@ -40,10 +40,6 @@ body, html {
     height: 450px;
 }
 
-body {
-    padding: 2em;
-}
-
 table.table {
     width: 100%;
 }
@@ -101,10 +97,6 @@ button.delete {
     }
 }
 
-* {
-    box-model: border-box;
-}
-
 #real-estates-detail #author img {
     width: 100%;
 }
@@ -122,4 +114,40 @@ button.delete {
     cursor: pointer;
     padding: 1%;
     max-width: 25%;
+}
+
+div.comment-list {
+    display: block;
+    margin-bottom: 35px;
+}
+
+div.comment-block {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+div.comment-name {
+    margin-bottom: 5px;
+
+}
+div.comment-name a {
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    border-bottom: 1px solid darkgrey;
+}
+
+div.comment-name span {
+    float: right;
+    font-size: 10px;
+    color: #8a8a8a;
+}
+div.comment-text {
+    margin-left: 10px;
+}
+
+div.bottom {
+    margin-bottom: 5px;
 }

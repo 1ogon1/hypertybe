@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Activate;
+use App\Comment;
+use App\Movie2Comment;
+use App\Reset_password;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -16,6 +19,8 @@ use PDOException;
 
 class IndexController extends Controller
 {
+    private $redirectURL = 'http://localhost:80/facebooklogin';
+
     public function __construct()
     {
         session_start();
@@ -25,7 +30,7 @@ class IndexController extends Controller
     {
         if (isset($_SESSION['email']))
         {
-            return redirect('/profile');
+            return redirect('/login');
         }
 
         return view('index');
@@ -41,12 +46,90 @@ class IndexController extends Controller
 
         ]);
         $helper = $fb->getRedirectLoginHelper();
-        $loginFb = $helper->getLoginUrl('http://localhost:8080/facebooklogin');
+        $loginFb = $helper->getLoginUrl($this->redirectURL);
 
         return view('user.login')->with([
             'loginFb' => $loginFb,
             'title' => $title
         ]);
+    }
+
+    public function Activate($token)
+    {
+//        echo $token;
+        if (!empty($token))
+        {
+            $activate = DB::table('activates')
+                        ->where('token', $token)
+                        ->first();
+            if (!empty($activate->user_email))
+            {
+//                var_dump($activate);
+                DB::table('users')
+                    ->where('email', $activate->user_email)
+                    ->update(['active' => 1]);
+                Activate::where('token', $token)->delete();
+                return redirect('/login')->with('success', 'Ваш аккаунт активирован');
+            }
+            return redirect('/login')->with('warning', 'Ссылка введена не верно');
+        }
+        return redirect('/login')->with('warning', 'Ссылка введена не верно');
+    }
+
+    public function ResetPassword($token = null)
+    {
+        if ($token)
+        {
+            $reset_password = DB::table('reset_passwords')
+                ->where('token', $token)
+                ->first();
+            if ($reset_password->user_email)
+            {
+                DB::table('users')
+                    ->where('email', $reset_password->user_email)
+                    ->update(['password' => $reset_password->newpw]);
+
+                Reset_password::where('token', $token)->delete();
+                return redirect('/login/')->with('info', 'Password was updated');
+            }
+            return redirect('/login/')->with('warning', 'Wrong link');
+        }
+        else {
+            return view('user.resetpw')->with('title', 'Reset password');
+        }
+    }
+
+    public function ResetPasswordSend()
+    {
+        if ($_POST['email']) {
+            $user = DB::table('users')->where('email', $_POST['email'])->first();
+
+            if ($user->email) {
+                $newPW = rand(1000000, 9999999);
+
+                $reset_password = new Reset_password();
+
+                $reset_password->user_email = $_POST['email'];
+                $reset_password->token = $_POST['_token'];
+                $reset_password->newpw = hash('whirlpool', $newPW);
+
+                $reset_password->save();
+
+                $headers = "Content-Type: text/html; charset=utf-8" . "\r\n";
+                $subject = "Matcha Account Activation";
+                $r1 = "<html><head><style>.button { background-color: #646464 ; border: none;color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;}</style><head>";
+                $r2 = "<body><h1>Matcha Account Activation</h1>";
+                $r3 = "<article><p>Hi, $user->name!</p>New password: $newPW";
+                $r4 = "<p>To change your password please click on button below!</p>";
+                $r5 = "<a href='http://localhost:80/reset/$user->token' class='button'>Change</a></article>";
+                $r6 = "<p>Best regards, Hypertybe Dev</p></body></html>";
+                $message = $r1 . $r2 . $r3 . $r4 . $r5 . $r6;
+                mail($user->email, $subject, $message, $headers);
+                return redirect('/login/')->with('info', 'Please check you email');
+            }
+            return redirect('/login/')->with('warning', 'Wrong email');
+        }
+        return redirect('/login/')->with('warning', 'Wrong email');
     }
 
     public function SignIn()
@@ -115,6 +198,16 @@ class IndexController extends Controller
 //                    Mail::raw($subject, function ($message) {
 //                        $message->to($_POST['email']);
 //                    });
+                    $headers = "Content-Type: text/html; charset=utf-8" . "\r\n";
+                    $subject = "Matcha Account Activation";
+                    $r1 = "<html><head><style>.button { background-color: #646464 ; border: none;color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;}</style><head>";
+                    $r2 = "<body><h1>Matcha Account Activation</h1>";
+                    $r3 = "<article><p>Hi, $user->name!</p><p>Thanks for registration on <span>Hypertybe<span></p>";
+                    $r4 = "<p>To activate your account on site please click on button below!</p>";
+                    $r5 = "<a href='http://localhost:80/activate/$user->token' class='button'>Activate</a></article>";
+                    $r6 = "<p>Best regards, Hypertybe Dev</p></body></html>";
+                    $message = $r1 . $r2 . $r3 . $r4 . $r5 . $r6;
+                    mail($user->email, $subject, $message, $headers);
                     return redirect('/login/')->with('info', 'Please check you email');
                 } else {
                     return redirect('/register/')->with('error', 'Something wrong! User not saved! Sorry :(');
@@ -125,7 +218,12 @@ class IndexController extends Controller
             }
         }
     }
-
+//MAIL_DRIVER=smtp
+//MAIL_HOST=smtp.mailtrap.io
+//MAIL_PORT=2525
+//MAIL_USERNAME=null
+//MAIL_PASSWORD=null
+//MAIL_ENCRYPTION=null
     public function facebooklogin()
     {
         $fb = new Facebook([
@@ -139,7 +237,7 @@ class IndexController extends Controller
             $helper->getPersistentDataHandler()->set('state', $_GET['state']);
         }
         try {
-            $accessToken = $helper->getAccessToken('http://localhost:8080/facebooklogin');
+            $accessToken = $helper->getAccessToken($this->redirectURL);
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;

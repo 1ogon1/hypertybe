@@ -1,0 +1,108 @@
+body {
+    font: normal 18px Cookie, Arial, Helvetica, sans-serif;
+    /*line-height: 40px;*/
+
+}
+
+/* HEADER */
+div.header {
+    background-color: #292c2f;
+    height: 96px;
+    -webkit-transition: top 0.3s;
+    transition: top 0.3s;
+    margin-bottom: 40px;
+}
+
+div.header a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+div.header h1 {
+    font-size: 25px;
+}
+
+div.header h1 a span {
+    color: #5383d3;
+}
+
+div.header div.auto {
+    margin: auto;
+}
+
+.nav-link {
+    padding: 0;
+}
+
+li.nav-item {
+    margin: 0 5px;
+}
+
+li.nav-item a:hover {
+    color: #5e5e5e;
+}
+
+@media (max-width: 576px) {
+    div.header div.auto {
+        text-align: center;
+    }
+}
+/* END HEADER */
+
+/* LOGIN FORM */
+.btn-primary {
+    background-color: #292c2f;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #5e5e5e;
+}
+
+div.login-with {
+    margin-top: 15px;
+}
+div.login-with p {
+    margin: 13px 0;
+    font-size: 17px;
+}
+
+div.login-with a {
+    background: none;
+    border: none;
+
+}
+div.login-with a img {
+    width: 50px;
+}
+
+div.login-with span.intra {
+    margin-right: 20px;
+}
+
+div.login-with span.fb a img {
+    width: 36px;
+}
+
+div.login-with a:hover {
+    border: #000000;
+}
+div.input-group {
+    margin: 0;
+    width: 100%;
+}
+
+a.forgot-pw {
+    text-decoration: none;
+}
+/* END LOGIN FORM */
+
+/* FOOTER */
+div.footer {
+    background-color: #292c2f;
+    text-align: center;
+    height: 96px;
+    font: normal 18px sans-serif;
+    color: #ffffff;
+}
+/* END FOOTER */

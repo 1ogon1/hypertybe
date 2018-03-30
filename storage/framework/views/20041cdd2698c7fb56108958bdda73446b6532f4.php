@@ -5,6 +5,7 @@
     <title><?php echo e($title); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="<?php echo e(URL::asset('css/mycss.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(URL::asset('css/movieinfo.css')); ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -20,12 +21,12 @@
                     <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="/profile/<?php echo $_SESSION['user_id'] ?>">
                         <img >
-                        My profile
+                        Мой профиль
                     </a>
-                    <a href="/logout">Logout</a>
+                    <a href="/logout">Выход</a>
                     <?php else: ?>
-                    <a href="/login">Login</a>
-                    <a href="/register">Register</a>
+                    <a href="/login">Вход</a>
+                    <a href="/register">Регистрация</a>
                     <?php endif; ?>
                 </nav>
             </div>

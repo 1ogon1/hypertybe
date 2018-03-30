@@ -14,13 +14,17 @@
 /* GET */
 Route::get('/', 'MoviesController@index');
 
-Route::get('/login', 'IndexController@Login')->name('login');
-Route::get('/register', 'IndexController@Register')->name('register');
+Route::get('/login', 'IndexController@Login');
+Route::get('/register', 'IndexController@Register');
 
-Route::get('/profile/{id}', 'IndexController@profile')->name('profile');
+Route::get('/activate/{token}', 'IndexController@Activate');
 
-Route::get('intralogin', 'IndexController@intralogin')->name('intralogin');
-Route::get('facebooklogin', 'IndexController@facebooklogin')->name('facebooklogin');
+Route::get('/reset/{token?}', 'IndexController@ResetPassword');
+
+Route::get('/profile/{id}', 'IndexController@profile');
+
+Route::get('intralogin', 'IndexController@intralogin');
+Route::get('facebooklogin', 'IndexController@facebooklogin');
 
 Route::get('logout', 'IndexController@logout')->name('logout');
 /* MOVIE */
@@ -32,4 +36,5 @@ Route::get('movies/{id}', 'MoviesController@movieInfo');
 Route::post('signin', 'IndexController@SignIn')->name('signin');
 Route::post('signup', 'IndexController@SignUp')->name('signup');
 Route::post('update', 'IndexController@Update')->name('update');
-
+Route::post('addcomment', 'MoviesController@AddComment')->name('addcomment');
+Route::post('resetpw', 'IndexController@ResetPasswordSend')->name('resetpw');
