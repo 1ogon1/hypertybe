@@ -1,7 +1,7 @@
 @include('layout.header')
 <div class="row filter">
     <div class="col-lg-4">
-        <p>Genre:</p>
+        <p>Жанр:</p>
         <select name="" id="genre">
             @foreach ($genres as $genre)
                 <option value="{{ $genre }}">{{ $genre }}</option>
@@ -9,7 +9,7 @@
         </select>
     </div>
     <div class="col-lg-4">
-        <p>Minimal rating:</p>
+        <p>Рейтинг:</p>
         <select name="" id="minimalRating">
             @for($i = 0; $i < 10; $i++)
                 <option value="{{ $i }}">{{ $i }}+</option>
@@ -17,22 +17,22 @@
         </select>
     </div>
     <div class="col-lg-4">
-        <p>Quality:</p>
+        <p>Качество:</p>
         <select class="custom-select" name="" id="quality">
             @foreach ($qualitys as $quality)
                 <option value="{{ $quality }}">{{ $quality }}</option>
             @endforeach
         </select>
     </div>
-    <button id="filterButton" type="button" class="btn btn-primary">Search</button>
+    {{--<button id="filterButton" type="button" class="btn btn-primary">Поиск</button>--}}
 </div>
 
 <div class="row">
     <div class="col-lg-12">
         <div class="form-group">
             <div class="input-group">
-                <input id="input" type="text" class="form-control" placeholder="Search film">
-                <div id="search" class="input-group-addon"><a href="">Search</a></div>
+                <input id="input" type="text" class="form-control" placeholder="Поиск фильма">
+                <div id="search" class="input-group-addon"><a href="">Поиск</a></div>
             </div>
         </div>
     </div>
@@ -41,10 +41,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="filter">
-            <p>Sort</p>
-            <a class="sortButton" href="" data-sort="title">Title</a>
-            <a class="sortButton" href="" data-sort="year">Year</a>
-            <a class="sortButton" href="" data-sort="rating">Rating</a>
+            <p>Сортировать</p>
+            <a class="sortButton" href="" data-sort="title">Название</a>
+            <a class="sortButton" href="" data-sort="year">Год</a>
+            <a class="sortButton" href="" data-sort="rating">Рейтинг</a>
         </div>
     </div>
 </div>

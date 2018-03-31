@@ -7,28 +7,39 @@ $(document).ready(function () {
 
     $('#search').click(function () {
         var params = {
+            quality: $('#quality option:selected').val(),
+            minimum_rating: $('#minimalRating option:selected').val(),
+            genre: $('#genre option:selected').val(),
             query_term: $('#input').val(),
             page: 1
         };
         getMovies(params, true);
         $('#pattern').attr('data-query_term', $('#input').val());
-        return false;
-    });
 
-    $('#filterButton').click(function () {
-        var params = {
-            quality: $('#quality option:selected').val(),
-            minimum_rating: $('#minimalRating option:selected').val(),
-            genre: $('#genre option:selected').val(),
-            query_term: $('#pattern').attr('data-query_term'),
-            page: 1
-        };
+
         $('#pattern').attr('data-sort', 'title');
         $('#pattern').attr('data-quality', params.quality);
         $('#pattern').attr('data-minimum_rating', params.minimum_rating);
         $('#pattern').attr('data-genre', params.genre);
-        getMovies(params, true);
+
+
+        return false;
     });
+
+    // $('#filterButton').click(function () {
+    //     var params = {
+    //         quality: $('#quality option:selected').val(),
+    //         minimum_rating: $('#minimalRating option:selected').val(),
+    //         genre: $('#genre option:selected').val(),
+    //         query_term: $('#pattern').attr('data-query_term'),
+    //         page: 1
+    //     };
+    //     $('#pattern').attr('data-sort', 'title');
+    //     $('#pattern').attr('data-quality', params.quality);
+    //     $('#pattern').attr('data-minimum_rating', params.minimum_rating);
+    //     $('#pattern').attr('data-genre', params.genre);
+    //     getMovies(params, true);
+    // });
 
     $('.sortButton').click(function () {
         if ($(this).attr('data-sort') === $('#pattern').attr('data-sort')) {

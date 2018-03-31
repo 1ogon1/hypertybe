@@ -10,24 +10,35 @@
     <link rel="stylesheet" href="{{ URL::asset('css/movieinfo.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+    {{--<script type=“text/javascript” src=“{{URL::asset('js/translate.js')}}”></script>--}}
+
+    <script type="text/javascript">
+       function googleTranslateElementInit() {
+           var laang = 'en';
+//           new google.translate.TranslateElement({pageLanguage: 'ru',includedLanguages: 'ru,en,fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+           new google.translate.TranslateElement({pageLanguage: 'ru',includedLanguages: 'ru,en,fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+       }
+   </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <body>
 <div class="container-fluid">
     <div class="row">
         <header class="header-fixed">
-            <div class="header-limiter">
+            <div class="header-limiter notranslate">
                 <h1><a href="/">UNIT<span>HYPERTYBE</span></a></h1>
+                <div id='google_translate_element'></div>
                 <nav>
-                    <?php if (isset($_SESSION['user_id'])): ?>
+                <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="/profile/<?php echo $_SESSION['user_id'] ?>">
-                        <img >
                         Мой профиль
                     </a>
                     <a href="/logout">Выход</a>
-                    <?php else: ?>
+                <?php else: ?>
                     <a href="/login">Вход</a>
                     <a href="/register">Регистрация</a>
-                    <?php endif; ?>
+                <?php endif; ?>
                 </nav>
             </div>
         </header>

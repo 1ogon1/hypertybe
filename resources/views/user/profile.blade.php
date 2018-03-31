@@ -1,4 +1,13 @@
 @include('layout.header')
+
+@if (session('update'))
+    <div class="row">
+        <div class="col-md-12 alert alert-info">
+            {{ session('update') }}
+        </div>
+    </div>
+@endif
+
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
@@ -31,10 +40,18 @@
                            placeholder="Вваедите фамилию">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email адресс</label>
+                    <label for="email">Email адрес</label>
                     <input type="email" class="form-control" value="{{$user->email}}" name="email" id="email"
                            aria-describedby="email"
                            placeholder="Введите email" required>
+                </div>
+                <div class="form-group">
+                    <label for="language">Выбрать язык</label>
+                    <select class="form-control" id="language" name="lang">
+                        <option value="ru" @if ($user->lang == "ru") selected @endif>Рус</option>
+                        <option value="en" @if ($user->lang == "en") selected @endif>Eng</option>
+                        <option value="fr" @if ($user->lang == "fr") selected @endif>Fra</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
@@ -61,7 +78,7 @@
                        readonly>
             </div>
             <div class="form-group">
-                <label for="email">Email адресс</label>
+                <label for="email">Email адрес</label>
                 <input type="email" class="form-control" value="{{$user->email}}" name="email" id="email"
                        aria-describedby="email"
                        placeholder="Поле пустое"

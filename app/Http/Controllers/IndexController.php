@@ -19,7 +19,7 @@ use PDOException;
 
 class IndexController extends Controller
 {
-    private $redirectURL = 'http://localhost:80/facebooklogin';
+    private $redirectURL = 'http://localhost:8080/facebooklogin';
 
     public function __construct()
     {
@@ -56,7 +56,6 @@ class IndexController extends Controller
 
     public function Activate($token)
     {
-//        echo $token;
         if (!empty($token))
         {
             $activate = DB::table('activates')
@@ -64,16 +63,15 @@ class IndexController extends Controller
                         ->first();
             if (!empty($activate->user_email))
             {
-//                var_dump($activate);
                 DB::table('users')
                     ->where('email', $activate->user_email)
                     ->update(['active' => 1]);
                 Activate::where('token', $token)->delete();
-                return redirect('/login')->with('success', 'Ваш аккаунт активирован');
+                return redirect('/login')->with('success', 'Ваш аккаунт активирован!');
             }
-            return redirect('/login')->with('warning', 'Ссылка введена не верно');
+            return redirect('/login')->with('warning', 'Ссылка введена не верно!');
         }
-        return redirect('/login')->with('warning', 'Ссылка введена не верно');
+        return redirect('/login')->with('warning', 'Ссылка введена не верно!');
     }
 
     public function ResetPassword($token = null)
@@ -90,9 +88,9 @@ class IndexController extends Controller
                     ->update(['password' => $reset_password->newpw]);
 
                 Reset_password::where('token', $token)->delete();
-                return redirect('/login/')->with('info', 'Password was updated');
+                return redirect('/login/')->with('info', 'Ваш пароль был обновлен!');
             }
-            return redirect('/login/')->with('warning', 'Wrong link');
+            return redirect('/login/')->with('warning', 'Ссылка введена не верно!');
         }
         else {
             return view('user.resetpw')->with('title', 'Reset password');
@@ -116,20 +114,20 @@ class IndexController extends Controller
                 $reset_password->save();
 
                 $headers = "Content-Type: text/html; charset=utf-8" . "\r\n";
-                $subject = "Matcha Account Activation";
+                $subject = "Hypertybe! Reset password";
                 $r1 = "<html><head><style>.button { background-color: #646464 ; border: none;color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;}</style><head>";
-                $r2 = "<body><h1>Matcha Account Activation</h1>";
+                $r2 = "<body><h1>Hypertybe! Reset password</h1>";
                 $r3 = "<article><p>Hi, $user->name!</p>New password: $newPW";
                 $r4 = "<p>To change your password please click on button below!</p>";
-                $r5 = "<a href='http://localhost:80/reset/$user->token' class='button'>Change</a></article>";
+                $r5 = "<a href='http://localhost:8080/reset/$user->token' class='button'>Change</a></article>";
                 $r6 = "<p>Best regards, Hypertybe Dev</p></body></html>";
                 $message = $r1 . $r2 . $r3 . $r4 . $r5 . $r6;
                 mail($user->email, $subject, $message, $headers);
-                return redirect('/login/')->with('info', 'Please check you email');
+                return redirect('/login/')->with('info', 'Пожалуйста, проверьте вашу почту!');
             }
-            return redirect('/login/')->with('warning', 'Wrong email');
+            return redirect('/login/')->with('warning', 'Email введен не верно!');
         }
-        return redirect('/login/')->with('warning', 'Wrong email');
+        return redirect('/login/')->with('warning', 'Email введен не верно!');
     }
 
     public function SignIn()
@@ -148,16 +146,16 @@ class IndexController extends Controller
                         return redirect('/');
                     }
                     else{
-                        return redirect('/login/')->with('warning', 'Activate account first');
+                        return redirect('/login/')->with('warning', 'Аккаунт не активирован!');
                     }
                 }
                 else {
-                    return redirect('/login/')->with('warning', 'Incorrect password');
+                    return redirect('/login/')->with('warning', 'Пароль введен не верно!');
                 }
             }
             else
             {
-                return redirect('/login/')->with('warning', 'Wrong email');
+                return redirect('/login/')->with('warning', 'Email введен не верно!');
             }
         }
     }
@@ -180,7 +178,7 @@ class IndexController extends Controller
                 $user->token = $_POST['_token'];
                 $user->password = hash('whirlpool', $_POST['password']);
                 $user->active = 0;
-
+                $user->lang = "ru";
 
                 if ($user->save()) {
                     $activate = new Activate();
@@ -189,41 +187,27 @@ class IndexController extends Controller
                     $activate->user_email = $_POST['email'];
 
                     $activate->save();
-//                    Mail::send('', ['user' => $user], function ($mail) use ($user) {
-//                        $mail->from('konovalenkoruslan@gmail.com', 'Hypertybe');
-//
-//                        $subject = 'http://localhost:8080/active/'.$_POST['_token'];
-//                        $mail->to($user->email, $user->name)->subject($subject);
-//                    });
-//                    Mail::raw($subject, function ($message) {
-//                        $message->to($_POST['email']);
-//                    });
                     $headers = "Content-Type: text/html; charset=utf-8" . "\r\n";
-                    $subject = "Matcha Account Activation";
+                    $subject = "Hypertybe! Account activation";
                     $r1 = "<html><head><style>.button { background-color: #646464 ; border: none;color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;}</style><head>";
-                    $r2 = "<body><h1>Matcha Account Activation</h1>";
+                    $r2 = "<body><h1>Hypertybe! Account activation</h1>";
                     $r3 = "<article><p>Hi, $user->name!</p><p>Thanks for registration on <span>Hypertybe<span></p>";
                     $r4 = "<p>To activate your account on site please click on button below!</p>";
-                    $r5 = "<a href='http://localhost:80/activate/$user->token' class='button'>Activate</a></article>";
+                    $r5 = "<a href='http://localhost:8080/activate/$user->token' class='button'>Activate</a></article>";
                     $r6 = "<p>Best regards, Hypertybe Dev</p></body></html>";
                     $message = $r1 . $r2 . $r3 . $r4 . $r5 . $r6;
                     mail($user->email, $subject, $message, $headers);
-                    return redirect('/login/')->with('info', 'Please check you email');
+                    return redirect('/login/')->with('info', 'Пожалуйста, проверьте вашу почту!');
                 } else {
-                    return redirect('/register/')->with('error', 'Something wrong! User not saved! Sorry :(');
+                    return redirect('/register/')->with('error', 'Произошла ошибка при сохранении аккаунта! Проверьте корректность введенных данных!');
                 }
 
             } else {
-                return redirect('/register/')->with('error', "User with email <strong>" . $_POST['email'] . "</strong> already exists!");
+                return redirect('/register/')->with('error', "Аккаунт с такой почтой <strong>" . $_POST['email'] . "</strong> уже существует!");
             }
         }
     }
-//MAIL_DRIVER=smtp
-//MAIL_HOST=smtp.mailtrap.io
-//MAIL_PORT=2525
-//MAIL_USERNAME=null
-//MAIL_PASSWORD=null
-//MAIL_ENCRYPTION=null
+
     public function facebooklogin()
     {
         $fb = new Facebook([
@@ -293,18 +277,9 @@ class IndexController extends Controller
             $user->token = $accessToken->getValue();
             $user->email = $profile['email'];
             $user->active = 0;
+            $user->lang = "ru";
 
             $user->save();
-
-//            $url = "http://www.google.co.in/intl/en_com/images/srpr/logo1w.png";
-//            $contents = file_get_contents($url);
-//            $name = substr($url, strrpos($url, '/') + 1);
-//            Storage::disk('uploads/user_'.$user->id)->put($name, $contents);
-//            DB::table('users')
-//                ->where('id', $user->id)
-//                ->update([
-//                    'image' => '/public/uploads/user_'.$user->id.$name
-//                ]);
 
             $_SESSION['email'] = $profile['email'];
             $_SESSION['user_id'] = $user->id;
@@ -357,6 +332,7 @@ class IndexController extends Controller
                 $user->token = $response->access_token;
                 $user->email = $result->email;
                 $user->active = 0;
+                $user->lang = "ru";
 
                 $user->save();
                 $_SESSION['email'] = $result->email;
@@ -382,8 +358,8 @@ class IndexController extends Controller
                     ->update([
                         'name' => $_POST['name'],
                         'surname' => $_POST['surname'],
-                        'email' => $_POST['email']
-
+                        'email' => $_POST['email'],
+                        'lang' => $_POST['lang']
                     ]);
             }
             else
@@ -394,6 +370,7 @@ class IndexController extends Controller
                         'name' => $_POST['name'],
                         'surname' => $_POST['surname'],
                         'email' => $_POST['email'],
+                        'lang' => $_POST['lang'],
                         'password' => hash('whirlpool', $_POST['password'])
                     ]);
 
@@ -409,7 +386,7 @@ class IndexController extends Controller
                     ]);
             }
 
-            return redirect('/profile/'.$_POST['id'].'')->with('update', 'User data updated');
+            return redirect('/profile/'.$_POST['id'].'')->with('update', 'Данные были обновленны!');
         }
     }
 
@@ -423,7 +400,7 @@ class IndexController extends Controller
     public function profile($id = 0)
     {
         if (!isset($_SESSION['email']) && $id != 0) {
-            return redirect('/login/')->with('warning', 'Please login first!');
+            return redirect('/login/')->with('warning', 'Сначала нужно авторизоваться!');
         }
         $user = DB::table('users')->where('id', $id)->first();
 

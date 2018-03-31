@@ -1,3 +1,7 @@
+body {
+    top: 0 !important;
+}
+
 .filter {
     display: flex;
     justify-content: space-around;
@@ -83,7 +87,8 @@
 }
 
 .header-fixed .header-limiter {
-    max-width: 1200px;
+    /*max-width: 1200px;*/
+    width: 100%;
     text-align: center;
     margin: 0 auto;
 }
@@ -324,7 +329,6 @@ div.input-group {
     z-index: 99999999;
     border-radius: 5px;
     transition: all 1s;
-    /*background-color: #64a6da;*/
     background-image: url("/public/image/totop.png");
     background-size: 60px 60px;
 }
@@ -332,3 +336,33 @@ div.input-group {
 .to-top:hover {
     opacity: 1;
 }
+
+iframe.goog-te-banner-frame {
+    display: none!important;
+}
+div#goog-gt-tt {
+    display: none!important;
+}
+
+div.goog-te-gadget-simple {
+    background-color: inherit;
+    float: right;
+    margin: 10px 0 0 5px;
+}
+
+div.goog-te-gadget-simple img {
+    display: none;
+}
+
+div.goog-te-gadget-simple a {
+    line-height: 25px;
+}
+
+div.goog-te-gadget-simple a span {
+    margin: 0 2px;
+}
+
+/*div.goog-te-gadget-simple a span:last-child {*/
+    /*color: #000 !important;*/
+/*}*/
+
