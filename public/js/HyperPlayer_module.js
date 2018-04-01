@@ -495,6 +495,7 @@ var HyperPlayer = (function () {
         console.log('***** 4| initPlayer [in] *****');
 
 
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!link to download video
 
         full_movie_name = movie_folder_path + '/' + movie_folder.replace(/ /g, '%20') + '/' + mv_name.replace(/ /g, '%20');
       //  alert(full_movie_name);
@@ -502,6 +503,7 @@ var HyperPlayer = (function () {
 
         // alert('0' + mv_subt_name);
         if (typeof (mv_subt_name) !==  'undefined') {
+            // !!!!!!!!!!!!!!!!!!!!!!!! link to download titles
             movie_titles = movie_folder_path + '/' + movie_folder.replace(/ /g, '%20') + '/' + mv_subt_name.replace(/ /g, '%20');
             console.log('4| movie title path: ' + movie_titles);
         }
@@ -603,11 +605,14 @@ var HyperPlayer = (function () {
         // console.log('***  3| getCurrentMovieSize [in]***');
 
         // console.log('3| getting current size of torrent');
+
+        //todo ostanovka
         $.post( php_script_size_path, { movie_path: movie_folder, _token: $('meta[name=csrf-token]').attr('content')})
             .done(function( data ) {
 
-                console.log('3| torrent_downloaded = ' + data);
 
+                console.log('3| torrent_downloaded = ' + data);
+                //todo data vid 1 do 100
                 video_downloaded = data;
 
                 // console.log('3| check how many % dowloaded');
@@ -694,6 +699,8 @@ var HyperPlayer = (function () {
                 var movie_info = jQuery.parseJSON( data );
                 console.log('1| get info about movie from folder');
 
+
+                //todo proverit pravilni li put
                 movie_name = movie_info[0];  console.log('1| movie_name = ' + movie_name);
                 movie_titles = movie_info[1]; console.log('1| movie_titles = ' + movie_titles);
 
