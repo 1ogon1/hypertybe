@@ -1,28 +1,34 @@
 @include('layout.header')
 <div class="row filter">
     <div class="col-lg-4">
-        <p>Жанр:</p>
+        <p>Genre:</p>
+        <div class="custom-select" style="width:200px;">
         <select name="" id="genre">
             @foreach ($genres as $genre)
                 <option value="{{ $genre }}">{{ $genre }}</option>
             @endforeach
         </select>
+        </div>
     </div>
     <div class="col-lg-4">
-        <p>Рейтинг:</p>
+        <p>Rating:</p>
+        <div class="custom-select" style="width:200px;">
         <select name="" id="minimalRating">
             @for($i = 0; $i < 10; $i++)
                 <option value="{{ $i }}">{{ $i }}+</option>
             @endfor
         </select>
+        </div>
     </div>
     <div class="col-lg-4">
-        <p>Качество:</p>
-        <select class="custom-select" name="" id="quality">
+        <p>Quality:</p>
+        <div class="custom-select" style="width:200px;">
+        <select name="" id="quality">
             @foreach ($qualitys as $quality)
                 <option value="{{ $quality }}">{{ $quality }}</option>
             @endforeach
         </select>
+        </div>
     </div>
     {{--<button id="filterButton" type="button" class="btn btn-primary">Поиск</button>--}}
 </div>
@@ -32,7 +38,7 @@
         <div class="form-group">
             <div class="input-group">
                 <input id="input" type="text" class="form-control" placeholder="Поиск фильма">
-                <div id="search" class="input-group-addon"><a href="">Поиск</a></div>
+                <div id="search" class="input-group-addon"><a href="">Search</a></div>
             </div>
         </div>
     </div>
@@ -41,10 +47,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="filter">
-            <p>Сортировать</p>
-            <a class="sortButton" href="" data-sort="title">Название</a>
-            <a class="sortButton" href="" data-sort="year">Год</a>
-            <a class="sortButton" href="" data-sort="rating">Рейтинг</a>
+            <p>Sort</p>
+            <a class="sortButton" href="" data-sort="title">Name</a>
+            <a class="sortButton" href="" data-sort="year">Year</a>
+            <a class="sortButton" href="" data-sort="rating">Rating</a>
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@
                     <div class="input-group">
                         <label class="input-group-btn">
                     <span class="btn btn-primary">
-                        Выбрать&hellip; <input type="file" name="image" style="display: none;" accept="image/*">
+                        Choose&hellip; <input type="file" name="image" style="display: none;" accept="image/*">
                     </span>
                         </label>
                         <input type="text" class="form-control" readonly>
@@ -29,25 +29,25 @@
                 </div>
                 <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
                 <div class="form-group">
-                    <label for="name">Имя</label>
+                    <label for="name">Name</label>
                     <input type="name" class="form-control" value="<?php echo e($user->name); ?>" name="name" id="name"
                            aria-describedby="name"
-                           placeholder="Введите имя" required>
+                           placeholder="Enter name" required>
                 </div>
                 <div class="form-group">
-                    <label for="surname">Фамилия</label>
+                    <label for="surname">Surname</label>
                     <input type="surname" class="form-control" value="<?php echo e($user->surname); ?>" name="surname" id="surname"
                            aria-describedby="surname"
-                           placeholder="Вваедите фамилию">
+                           placeholder="Enter surname">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email адрес</label>
+                    <label for="email">Email address</label>
                     <input type="email" class="form-control" value="<?php echo e($user->email); ?>" name="email" id="email"
                            aria-describedby="email"
-                           placeholder="Введите email" required>
+                           placeholder="Enter email" required>
                 </div>
                 <div class="form-group">
-                    <label for="language">Выбрать язык</label>
+                    <label for="language">Choose language</label>
                     <select class="form-control" id="language" name="lang">
                         <option value="ru" <?php if($user->lang == "ru"): ?> selected <?php endif; ?>>Рус</option>
                         <option value="en" <?php if($user->lang == "en"): ?> selected <?php endif; ?>>Eng</option>
@@ -55,34 +55,34 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="password">Пароль</label>
+                    <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password"
                            aria-describedby="password"
-                           placeholder="Введите пароль">
+                           placeholder="Enter password">
                 </div>
-                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </form>
         <?php else: ?>
             <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
             <div class="form-group">
-                <label for="name">Имя</label>
+                <label for="name">Name</label>
                 <input type="name" class="form-control" value="<?php echo e($user->name); ?>" name="name" id="name"
                        aria-describedby="name"
-                       placeholder="Поле пустое"
+                       placeholder="Empty"
                        readonly>
             </div>
             <div class="form-group">
-                <label for="surname">Фамилия</label>
+                <label for="surname">Surname</label>
                 <input type="surname" class="form-control" value="<?php echo e($user->surname); ?>" name="surname" id="surname"
                        aria-describedby="surname"
-                       placeholder="Поле пустое"
+                       placeholder="Emty"
                        readonly>
             </div>
             <div class="form-group">
-                <label for="email">Email адрес</label>
+                <label for="email">Email address</label>
                 <input type="email" class="form-control" value="<?php echo e($user->email); ?>" name="email" id="email"
                        aria-describedby="email"
-                       placeholder="Поле пустое"
+                       placeholder="Empty"
                        readonly>
             </div>
         <?php endif; ?>

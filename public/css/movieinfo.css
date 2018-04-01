@@ -151,3 +151,7 @@ div.comment-text {
 div.bottom {
     margin-bottom: 5px;
 }
+
+.nopadding {
+    padding: 0 !important;
+}

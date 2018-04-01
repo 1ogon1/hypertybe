@@ -38,3 +38,7 @@ Route::post('signup', 'IndexController@SignUp')->name('signup');
 Route::post('update', 'IndexController@Update')->name('update');
 Route::post('addcomment', 'MoviesController@AddComment')->name('addcomment');
 Route::post('resetpw', 'IndexController@ResetPasswordSend')->name('resetpw');
+
+Route::post('filesize', 'MoviesController@FileSize')->name('filesize');
+Route::post('findmovie', 'MoviesController@FindMovie')->name('findmovie');
+//Route::get('/findmovie/{folder}', 'MoviesController@FindMovie');//->name('findmovie');

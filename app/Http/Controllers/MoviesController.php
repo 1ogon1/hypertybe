@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Movie2Comment;
+use Faker\Provider\File;
+use function GuzzleHttp\Psr7\_caseless_remove;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -11,6 +13,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MoviesController extends Controller
 {
@@ -126,10 +129,14 @@ class MoviesController extends Controller
                         ->orderBy('comments.created_at', 'desc')
                         ->get();
 
+//        $path = base_path('');
+
+        $path = '/public/movies/YouTube Folde Name/videoplayback.mp4';
         return view('movies.movieInfo')->with([
             'movieInfo' => $movieInfo,
             'title' => $movieInfo['title_english'],
-            'comments' => $comment
+            'comments' => $comment,
+            'path' => $path
         ]);
     }
 
@@ -175,5 +182,43 @@ class MoviesController extends Controller
             'message' => 'Коментарий пустой'
         ];
         return json_encode($result);
+    }
+
+    public function FileSize()
+    {
+        $movie = $_POST['movie_path'];
+
+
+//        return file_get_contents($movie . '/currentsize.txt');
+//        echo $movie;
+
+//        echo storage_path('app/' . $movie . 'currentsize.txt');
+
+        echo 'dsva';
+
+//        var_dump(    File::get(storage_path('app/' . $movie . 'currentsize.txt'))   );
+    }
+
+    public function FindMovie()
+    {
+        $path = $_POST['folder'];
+
+        $movie = array();
+
+        $folder_files = Storage::allFiles($path);
+
+        foreach ($folder_files as $file_name) {
+            $type = substr($file_name, -3);
+
+            if (!strcmp($type, 'mp4')) {
+                $movie[0] = $file_name;
+            }
+            if (!strcmp($type, 'srt')) {
+                $movie[1] = $file_name;
+            }
+        }
+        echo json_encode($movie);
+//        var_dump($folder_files);
+//        echo $path;
     }
 }

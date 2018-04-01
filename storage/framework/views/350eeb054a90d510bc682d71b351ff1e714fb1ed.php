@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <h1>Востановление пароля</h1>
+        <h1>Repairing password</h1>
     </div>
 </div>
 <div class="row">
@@ -10,11 +10,11 @@
         <form action="<?php echo e(route('resetpw')); ?>" method="post">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <div class="form-group">
-                <label for="email">Email адресс</label>
+                <label for="email">Email address</label>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
-                       placeholder="Введите email" required>
+                       placeholder="Enter email" required>
             </div>
-            <button type="submit" class="btn btn-primary">Отправить</button>
+            <button type="submit" class="btn btn-primary">Send</button>
         </form>
     </div>
 </div>

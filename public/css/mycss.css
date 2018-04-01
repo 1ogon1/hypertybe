@@ -204,15 +204,18 @@ body.fixed .header-fixed .header-limiter nav {
 }
 
 /* FOOTER */
-.footer-basic-centered {
+
+.fixed-bottom {
+    margin-top: 80px;
     background-color: #292c2f;
+}
+.footer-basic-centered {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
     text-align: center;
     font: normal 18px sans-serif;
     padding: 45px;
-    margin-top: 80px;
     position: relative;
     bottom: 0;
 }
@@ -249,8 +252,8 @@ body.fixed .header-fixed .header-limiter nav {
 
 /* Ruslan style */
 .btn-primary {
-    background-color: #292c2f;
-    border: none;
+    background-color: #292c2f !important;
+    border: none !important;
 }
 
 .btn-primary:hover {
@@ -362,7 +365,70 @@ div.goog-te-gadget-simple a span {
     margin: 0 2px;
 }
 
-/*div.goog-te-gadget-simple a span:last-child {*/
-    /*color: #000 !important;*/
-/*}*/
+div.video-player-min {
+    width: 150px;
+    height: 20px;
+    color: #fff;
+    cursor: pointer;
+    border: 1px #fff solid;
+    margin: 20px 40px;
+    background-color: #2b542c;
+}
 
+.my-fixed {
+    position: fixed;
+}
+
+.custom-select {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.custom-select select {
+    display: none; /*hide original SELECT element:*/
+}
+.select-selected {
+    background-color: #292c2f;
+    /*background-color: DodgerBlue;*/
+}
+/*style the arrow inside the select element:*/
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+/*style items (options):*/
+.select-items {
+    position: absolute;
+    /*background-color: DodgerBlue;*/
+    background-color: #292c2f;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+/*hide the items when the select box is closed:*/
+.select-hide {
+    display: none;
+}
+.select-items div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

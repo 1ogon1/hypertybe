@@ -25,20 +25,20 @@
 <div class="row">
     <div class="col-sm-3">
         <form action="{{ route('signin') }}" method="post">
-            <h1>Вход</h1>
+            <h1>Login</h1>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
-                <label for="email">Email адресс</label>
+                <label for="email">Email adress</label>
                 <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
-                       placeholder="Введите email" required>
+                       placeholder="Enter email" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Пароль</label>
                 <input type="password" class="form-control" name="password" id="exampleInputPassword1"
-                       placeholder="Введите пароль" required>
+                       placeholder="Enter password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Отправить</button>
-            <a href="/reset">Забыл пароль?</a>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            <a href="/reset">Forgot password?</a>
         </form>
     </div>
 </div>
@@ -46,7 +46,7 @@
     <div class="col-sm-3 login-with">
         <div class="row">
             <div class="col-sm-6">
-                <p>Войти через</p>
+                <p>Login with</p>
             </div>
             <div class="col-sm-6">
 <span class="intra">
