@@ -2,31 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ad90355-efa6-4a9d-9a91-a2133c170848" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/framework/sessions/miNX6UuCNV2iurfwqM8phNXKn9GwHcWpJfovWn4H" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/translate.js" afterPath="$PROJECT_DIR$/public/js/video-player-min.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/app/logo1w.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/app/movies/YouTube Folde Name/currentsize.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/app/movies/YouTube Folde Name/videoplayback.mp4" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/MoviesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/MoviesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/filesystems.php" afterPath="$PROJECT_DIR$/config/filesystems.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/movieinfo.css" afterPath="$PROJECT_DIR$/public/css/movieinfo.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/mycss.css" afterPath="$PROJECT_DIR$/public/css/mycss.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/movie.js" afterPath="$PROJECT_DIR$/public/js/movie.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/HyperPlayer_module.js" afterPath="$PROJECT_DIR$/public/js/HyperPlayer_module.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout/footer.blade.php" afterPath="$PROJECT_DIR$/resources/views/layout/footer.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout/header.blade.php" afterPath="$PROJECT_DIR$/resources/views/layout/header.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/movies/movieInfo.blade.php" afterPath="$PROJECT_DIR$/resources/views/movies/movieInfo.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/movies/movies.blade.php" afterPath="$PROJECT_DIR$/resources/views/movies/movies.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/login.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/profile.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/profile.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/register.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/register.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/user/resetpw.blade.php" afterPath="$PROJECT_DIR$/resources/views/user/resetpw.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/1d56d9bdccf35d6b3a532ef64af592b01971eafd.php" afterPath="$PROJECT_DIR$/storage/framework/views/1d56d9bdccf35d6b3a532ef64af592b01971eafd.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/350eeb054a90d510bc682d71b351ff1e714fb1ed.php" afterPath="$PROJECT_DIR$/storage/framework/views/350eeb054a90d510bc682d71b351ff1e714fb1ed.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/sessions/wcghL82YvfNpc4h7Kxx1kVCFWNAZ8px80htl8CUo" afterPath="$PROJECT_DIR$/storage/framework/sessions/wcghL82YvfNpc4h7Kxx1kVCFWNAZ8px80htl8CUo" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/37aaf231d26ff2dcbb1cce4ae6ec6de5b24bac3a.php" afterPath="$PROJECT_DIR$/storage/framework/views/37aaf231d26ff2dcbb1cce4ae6ec6de5b24bac3a.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/6e8f1298959c4dd2aca8edaac98a25ed24e2b160.php" afterPath="$PROJECT_DIR$/storage/framework/views/6e8f1298959c4dd2aca8edaac98a25ed24e2b160.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/9ac6822291dcf2e0c55afece1d7fa5fbdb1ee4c9.php" afterPath="$PROJECT_DIR$/storage/framework/views/9ac6822291dcf2e0c55afece1d7fa5fbdb1ee4c9.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/be7b69692760ac022e533bd6bc6ec847230d530d.php" afterPath="$PROJECT_DIR$/storage/framework/views/be7b69692760ac022e533bd6bc6ec847230d530d.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/d08dcf88d309a3979101aff351f70f5fb9107415.php" afterPath="$PROJECT_DIR$/storage/framework/views/d08dcf88d309a3979101aff351f70f5fb9107415.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/framework/views/e4d18cb6c56a96dfd45f22915b6b6c69518232c6.php" afterPath="$PROJECT_DIR$/storage/framework/views/e4d18cb6c56a96dfd45f22915b6b6c69518232c6.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/logs/laravel.log" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,11 +28,9 @@
       <file leaf-file-name="movieInfo.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/movies/movieInfo.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="112" column="40" lean-forward="true" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
-              <folding>
-                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-              </folding>
+            <state relative-caret-position="364">
+              <caret line="84" column="133" lean-forward="false" selection-start-line="84" selection-start-column="133" selection-end-line="84" selection-end-column="133" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/layout/footer.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="555">
-              <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+              <caret line="37" column="39" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -77,9 +62,11 @@
       <file leaf-file-name="HyperPlayer_module.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/HyperPlayer_module.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="610" column="40" lean-forward="true" selection-start-line="610" selection-start-column="40" selection-end-line="610" selection-end-column="40" />
-              <folding />
+            <state relative-caret-position="161">
+              <caret line="499" column="97" lean-forward="false" selection-start-line="499" selection-start-column="97" selection-end-line="499" selection-end-column="97" />
+              <folding>
+                <marker date="1522591714000" expanded="true" signature="16325:16350" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -117,8 +104,8 @@
       <file leaf-file-name="MoviesController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MoviesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="965">
-              <caret line="196" column="20" lean-forward="false" selection-start-line="196" selection-start-column="20" selection-end-line="196" selection-end-column="20" />
+            <state relative-caret-position="966">
+              <caret line="238" column="31" lean-forward="false" selection-start-line="238" selection-start-column="31" selection-end-line="238" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -127,7 +114,7 @@
       <file leaf-file-name="filesystems.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/filesystems.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
+            <state relative-caret-position="623">
               <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
               <folding />
             </state>
@@ -137,8 +124,8 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="43" column="88" lean-forward="true" selection-start-line="43" selection-start-column="88" selection-end-line="43" selection-end-column="88" />
+            <state relative-caret-position="420">
+              <caret line="37" column="86" lean-forward="true" selection-start-line="37" selection-start-column="86" selection-end-line="37" selection-end-column="86" />
               <folding />
             </state>
           </provider>
@@ -156,13 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>aliases</find>
-      <find>$helper</find>
-      <find>$code</find>
-      <find>$apiUrl</find>
-      <find>$token</find>
-      <find>localhost</find>
-      <find>data-sort</find>
       <find>Home</find>
       <find>search</find>
       <find>comment</find>
@@ -177,15 +157,22 @@
       <find>custom-select</find>
       <find>php_script_size_p</find>
       <find>php_script_size_path</find>
-      <find>movie_folder</find>
       <find>../img/</find>
       <find>img</find>
       <find>php_script_patch</find>
       <find>.get</find>
       <find>lo</find>
       <find>.get(</find>
-      <find>font</find>
       <find>_token</find>
+      <find>parseSu</find>
+      <find>parseSubtitle</find>
+      <find>movie_titles</find>
+      <find>full_movie_name</find>
+      <find>1)</find>
+      <find>movie_folder</find>
+      <find>movie_folder =</find>
+      <find>font</find>
+      <find>3)</find>
     </findStrings>
     <replaceStrings>
       <replace>/public/image/</replace>
@@ -221,13 +208,13 @@
         <option value="$PROJECT_DIR$/public/js/movie.js" />
         <option value="$PROJECT_DIR$/resources/views/movies/movies.blade.php" />
         <option value="$PROJECT_DIR$/public/css/mycss.css" />
-        <option value="$PROJECT_DIR$/resources/views/movies/movieInfo.blade.php" />
         <option value="$PROJECT_DIR$/public/css/hyper_player.css" />
         <option value="$PROJECT_DIR$/resources/views/layout/header.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/config/filesystems.php" />
         <option value="$PROJECT_DIR$/resources/views/layout/footer.blade.php" />
         <option value="$PROJECT_DIR$/public/js/HyperPlayer_module.js" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/movies/movieInfo.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/MoviesController.php" />
       </list>
     </option>
@@ -297,6 +284,27 @@
             <path>
               <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
               <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="storage" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="storage" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="movies" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="storage" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="movies" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="YouTube Folde Name" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -315,15 +323,7 @@
               <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="storage" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="movies" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="storage" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="movies" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="YouTube Folde Name" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
@@ -331,6 +331,16 @@
               <item name="storage" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="movies" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="storage" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="movies" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="YouTube Folde Name" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -348,11 +358,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/storage/app" />
       <recent name="$PROJECT_DIR$/storage/app/public" />
+      <recent name="$PROJECT_DIR$/public/storage" />
+      <recent name="$PROJECT_DIR$/storage/app" />
       <recent name="$PROJECT_DIR$/public/css" />
       <recent name="$PROJECT_DIR$/database/migrations" />
-      <recent name="$PROJECT_DIR$/database" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -453,12 +463,12 @@
       <workItem from="1521296591658" duration="16063000" />
       <workItem from="1522490299222" duration="29000" />
       <workItem from="1522490453613" duration="8718000" />
-      <workItem from="1522575885616" duration="10839000" />
+      <workItem from="1522575885616" duration="15069000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79043000" />
+    <option name="totallyTimeSpent" value="83273000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -468,6 +478,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294964" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -480,7 +491,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -744,10 +754,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/hyper_player.css">
+    <entry file="file://$PROJECT_DIR$/resources/views/layout/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-421">
-          <caret line="212" column="34" lean-forward="false" selection-start-line="212" selection-start-column="34" selection-end-line="212" selection-end-column="34" />
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -764,36 +782,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layout/header.blade.php">
+    <entry file="file://$PROJECT_DIR$/public/css/hyper_player.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="43" column="88" lean-forward="true" selection-start-line="43" selection-start-column="88" selection-end-line="43" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/movies/movieInfo.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="112" column="40" lean-forward="true" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="55" column="31" lean-forward="false" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+        <state relative-caret-position="-421">
+          <caret line="212" column="34" lean-forward="false" selection-start-line="212" selection-start-column="34" selection-end-line="212" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -801,23 +793,41 @@
     <entry file="file://$PROJECT_DIR$/resources/views/layout/footer.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
-          <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+          <caret line="37" column="39" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/HyperPlayer_module.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="610" column="40" lean-forward="true" selection-start-line="610" selection-start-column="40" selection-end-line="610" selection-end-column="40" />
+        <state relative-caret-position="161">
+          <caret line="499" column="97" lean-forward="false" selection-start-line="499" selection-start-column="97" selection-end-line="499" selection-end-column="97" />
+          <folding>
+            <marker date="1522591714000" expanded="true" signature="16325:16350" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="37" column="86" lean-forward="true" selection-start-line="37" selection-start-column="86" selection-end-line="37" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/movies/movieInfo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="84" column="133" lean-forward="false" selection-start-line="84" selection-start-column="133" selection-end-line="84" selection-end-column="133" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MoviesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="965">
-          <caret line="196" column="20" lean-forward="false" selection-start-line="196" selection-start-column="20" selection-end-line="196" selection-end-column="20" />
+        <state relative-caret-position="966">
+          <caret line="238" column="31" lean-forward="false" selection-start-line="238" selection-start-column="31" selection-end-line="238" selection-end-column="31" />
           <folding />
         </state>
       </provider>

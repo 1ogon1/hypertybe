@@ -32,6 +32,10 @@ Route::get('logout', 'IndexController@logout')->name('logout');
 Route::get('api/get_movies', 'MoviesController@getMovies');
 Route::get('parse_movies', 'MoviesController@parseMovies');
 Route::get('movies/{id}', 'MoviesController@movieInfo');
+
+
+
+Route::get('downloadmovie/{name}/{link}/{quality}', 'MoviesController@DownloadMovie');
 /* POST */
 Route::post('signin', 'IndexController@SignIn')->name('signin');
 Route::post('signup', 'IndexController@SignUp')->name('signup');

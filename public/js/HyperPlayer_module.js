@@ -6,7 +6,7 @@ var HyperPlayer = (function () {
     // var php_script_size_path = 'http://localhost:8080/Hypertube/php/filesize.php';
     var php_script_size_path = '/filesize';
     // var movie_folder_path = 'http://localhost:8080/Hypertube/Movie';
-    var movie_folder_path = '/public/movies';
+    var movie_folder_path = '/storage/';
 
     var movie_folder = '';
     var full_movie_name = '';
@@ -458,7 +458,7 @@ var HyperPlayer = (function () {
             '\n' +
             '                    <video id="video"  style="width: 100%; height: 100%"  onclick="PlayPauseVideo()" >\n' +
             '\n' +
-            '                        <source class="video-source" id="video-source-id" src="' + full_movie_name + '" type="video/mp4">\n' +
+            '                        <source class="video-source" id="video-source-id" src="{{URL::asset(\'' + full_movie_name + '\')}}" type="video/mp4">\n' +
             '\n' +
             '                    </video>\n' +
             '                </div>\n' +
@@ -497,14 +497,25 @@ var HyperPlayer = (function () {
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!link to download video
 
-        full_movie_name = movie_folder_path + '/' + movie_folder.replace(/ /g, '%20') + '/' + mv_name.replace(/ /g, '%20');
-      //  alert(full_movie_name);
+        full_movie_name =  movie_folder_path  + mv_name.replace(/ /g, '%20').replace('public/', '');
+
+
+
+        console.log('0) ' + full_movie_name);
+
+
+        console.log('1) ' + movie_folder_path);
+        console.log('2) ' + movie_folder);
+        console.log('3) ' + mv_name);
+
+
+        //  alert(full_movie_name);
         console.log('4| movie path: ' + full_movie_name);
 
         // alert('0' + mv_subt_name);
         if (typeof (mv_subt_name) !==  'undefined') {
             // !!!!!!!!!!!!!!!!!!!!!!!! link to download titles
-            movie_titles = movie_folder_path + '/' + movie_folder.replace(/ /g, '%20') + '/' + mv_subt_name.replace(/ /g, '%20');
+            movie_titles =  movie_folder_path + '/' + movie_folder.replace(/ /g, '%20') + '/' + mv_subt_name.replace(/ /g, '%20');
             console.log('4| movie title path: ' + movie_titles);
         }
 
@@ -611,13 +622,13 @@ var HyperPlayer = (function () {
             .done(function( data ) {
 
 
-                console.log('3| torrent_downloaded = ' + data);
-                //todo data vid 1 do 100
                 video_downloaded = data;
+
+                console.log('3| torrent_downloaded = [' + video_downloaded + ']');
 
                 // console.log('3| check how many % dowloaded');
                 if (video_downloaded > 2 && player_created_flag === 0) {
-                    // console.log('3| more than 5% dowloaded');
+                    console.log('3| more than 5% dowloaded');
                     player_created_flag = 1;
 
 
@@ -689,6 +700,8 @@ var HyperPlayer = (function () {
         container.html('<div class="preload-page"><div class="loading-info">0%</div><div class="player-42-logo"></div><div class="player-unit-logo"></div><div class="pre-text"><div class="player-pre-text"><span class="notranslate">Hypertube</span> player.</div> <br/>Подготовка файлов. <br/> Пожалуйста, подождите.</div></div>');
 
         movie_folder = folder_name; console.log('1| movie_folder = ' + movie_folder);
+        movie_folder = movie_folder.replace('public/','');
+
         p_container = container;  console.log('1| player_container = ' + p_container);
 
 
@@ -699,8 +712,6 @@ var HyperPlayer = (function () {
                 var movie_info = jQuery.parseJSON( data );
                 console.log('1| get info about movie from folder');
 
-
-                //todo proverit pravilni li put
                 movie_name = movie_info[0];  console.log('1| movie_name = ' + movie_name);
                 movie_titles = movie_info[1]; console.log('1| movie_titles = ' + movie_titles);
 

@@ -83,7 +83,7 @@
                                     </div>
                                     <?php $__currentLoopData = $movieInfo['torrents']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $torrent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div class="col-sm-2 col-xs-2 bottom">
-                                            <a href="<?php echo e($torrent['url']); ?>">
+                                            <a href="/downloadmovie/<?php echo e($movieInfo['title_english']); ?>/<?php echo e(base64_encode($torrent['url'])); ?>/<?php echo e($torrent['quality']); ?>">
                                                 <?php echo e($torrent['quality']); ?>
 
                                             </a>
@@ -111,9 +111,7 @@
                         </header>
                     </div>
                     <div class="panel-body video-panel">
-                        
-                            
-                        
+
                     </div>
                 </div>
             </div>

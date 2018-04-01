@@ -82,7 +82,7 @@
                                     </div>
                                     @foreach ($movieInfo['torrents'] as $torrent)
                                         <div class="col-sm-2 col-xs-2 bottom">
-                                            <a href="{{ $torrent['url'] }}">
+                                            <a href="/downloadmovie/{{$movieInfo['title_english']}}/{{ base64_encode($torrent['url']) }}/{{ $torrent['quality'] }}">
                                                 {{ $torrent['quality'] }}
                                             </a>
                                         </div>
@@ -108,9 +108,7 @@
                         </header>
                     </div>
                     <div class="panel-body video-panel">
-                        {{--<video>--}}
-                            {{--<source src="{{$path}}">--}}
-                        {{--</video>--}}
+
                     </div>
                 </div>
             </div>

@@ -129,7 +129,9 @@ class MoviesController extends Controller
                         ->orderBy('comments.created_at', 'desc')
                         ->get();
 
-//        $path = base_path('');
+        $_SESSION['movie_id'] = $id;
+        $_SESSION['movie_name'] = $data['data']['movie']['title_english'];
+        $_SESSION['movie_link'] = $data['data']['movie'];
 
         $path = '/public/movies/YouTube Folde Name/videoplayback.mp4';
         return view('movies.movieInfo')->with([
@@ -190,13 +192,14 @@ class MoviesController extends Controller
 
 
 //        return file_get_contents($movie . '/currentsize.txt');
-//        echo $movie;
+//        echo  $movie;
 
 //        echo storage_path('app/' . $movie . 'currentsize.txt');
 
-        echo 'dsva';
+//        echo '/storage/app/' . $movie . 'currentsize.txt';
 
-//        var_dump(    File::get(storage_path('app/' . $movie . 'currentsize.txt'))   );
+        echo Storage::disk('local')->get( 'public/' . $movie . 'currentsize.txt');
+//        var_dump(    File::get('/storage/app/' . $movie . 'currentsize.txt')   );
     }
 
     public function FindMovie()
@@ -207,6 +210,7 @@ class MoviesController extends Controller
 
         $folder_files = Storage::allFiles($path);
 
+//        var_dump($folder_files);
         foreach ($folder_files as $file_name) {
             $type = substr($file_name, -3);
 
@@ -220,5 +224,36 @@ class MoviesController extends Controller
         echo json_encode($movie);
 //        var_dump($folder_files);
 //        echo $path;
+    }
+
+    public function DownloadMovie($name = null, $link = null, $quality = null)
+    {
+        /*
+        **  parse-torrent *.torrent > info.json
+        */
+
+        // file_put_contents($argv[1],file_get_contents($argv[2]));
+
+        $torrent = "$name"."$quality.torrent";
+        $info = "$name"."$quality.json";
+
+        $link = base64_decode($link);
+
+        file_put_contents($torrent, file_get_contents($link));
+
+        $command = "cd storage/movies/ && parse-torrent $torrent > $info";
+        exec($command);
+
+
+        $json = file_get_contents($info);
+        $json = Storage::disk('local')->get( 'public/movies/'.$info);
+
+        $res = json_decode($json);
+
+        $_SESSION['movie_folder'] = $res->name;
+
+        $command = "cd storage/movies/ && torrent $torrent";
+        exec($command);
+
     }
 }

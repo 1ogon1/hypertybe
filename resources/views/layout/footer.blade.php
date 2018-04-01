@@ -35,5 +35,5 @@
 <script defer="defer">
     var folder = "YouTube Folde Name/";
 
-    HyperPlayer.dataFromFolder('movies/'+folder, $('.video-panel'));
+    HyperPlayer.dataFromFolder('public/movies/' + folder, $('.video-panel'));
 </script>
