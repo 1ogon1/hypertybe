@@ -35,7 +35,9 @@ Route::get('movies/{id}', 'MoviesController@movieInfo');
 
 
 
-Route::get('downloadmovie/{name}/{link}/{quality}', 'MoviesController@DownloadMovie');
+//Route::get('downloadmovie/{name}/{link}/{quality}', 'MoviesController@DownloadMovie');
+
+Route::post('downloadmovie', 'MoviesController@DownloadMovie')->name('downloadmovie');
 /* POST */
 Route::post('signin', 'IndexController@SignIn')->name('signin');
 Route::post('signup', 'IndexController@SignUp')->name('signup');

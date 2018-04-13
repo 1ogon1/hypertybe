@@ -81,10 +81,8 @@
                                         </p>
                                     </div>
                                     @foreach ($movieInfo['torrents'] as $torrent)
-                                        <div class="col-sm-2 col-xs-2 bottom">
-                                            <a href="/downloadmovie/{{$movieInfo['title_english']}}/{{ base64_encode($torrent['url']) }}/{{ $torrent['quality'] }}">
-                                                {{ $torrent['quality'] }}
-                                            </a>
+                                        <div class="col-sm-2 col-xs-2 bottom movie-info" data-title="{{$movieInfo['title_english']}}" data-torrent="{{ base64_encode($torrent['url']) }}" data-quality="{{ $torrent['quality'] }}">
+                                            {{ $torrent['quality'] }}
                                         </div>
                                         <div class="col-sm-10 col-xs-10 bottom">
                                             Size: {{ $torrent['size'] }}
@@ -108,7 +106,7 @@
                         </header>
                     </div>
                     <div class="panel-body video-panel">
-
+                        <div class="loader movie-info-loader"></div>
                     </div>
                 </div>
             </div>
@@ -116,7 +114,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-offset-1 col-sm-10">
+    <div class="col-sm-12">
         <div class="comment-list" id="comments">
             @foreach($comments as $comment)
                 <div class="comment-block">
@@ -150,5 +148,5 @@
         </div>
     </div>
 </div>
-@include('layout.footer')
+@include('layout.footer_info')
 <script src="{{URL::asset('js/movieinfo.js')}}" type="text/javascript"></script>

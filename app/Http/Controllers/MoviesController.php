@@ -133,12 +133,10 @@ class MoviesController extends Controller
         $_SESSION['movie_name'] = $data['data']['movie']['title_english'];
         $_SESSION['movie_link'] = $data['data']['movie'];
 
-        $path = '/public/movies/YouTube Folde Name/videoplayback.mp4';
         return view('movies.movieInfo')->with([
             'movieInfo' => $movieInfo,
             'title' => $movieInfo['title_english'],
-            'comments' => $comment,
-            'path' => $path
+            'comments' => $comment
         ]);
     }
 
@@ -226,34 +224,25 @@ class MoviesController extends Controller
 //        echo $path;
     }
 
-    public function DownloadMovie($name = null, $link = null, $quality = null)
+    public function DownloadMovie(/*$name = null, $link = null, $quality = null*/)
     {
-        /*
-        **  parse-torrent *.torrent > info.json
-        */
 
-        // file_put_contents($argv[1],file_get_contents($argv[2]));
-
+        $name = $_POST['title'];
+        $link = $_POST['torrent'];
+        $quality = $_POST['quality'];
         $torrent = "$name"."$quality.torrent";
-        $info = "$name"."$quality.json";
+//        $info = "$name"."$quality.json";
 
         $link = base64_decode($link);
 
-        file_put_contents($torrent, file_get_contents($link));
+        Storage::disk('local')->put('public/movies/'.$torrent, file_get_contents($link));
 
-        $command = "cd storage/movies/ && parse-torrent $torrent > $info";
-        exec($command);
+        sleep(5);
+        $path = Storage::disk('local')->get( 'public/movies/' . $torrent . 'path');
 
+        $_SESSION['movie_folder'] = $path;
 
-        $json = file_get_contents($info);
-        $json = Storage::disk('local')->get( 'public/movies/'.$info);
-
-        $res = json_decode($json);
-
-        $_SESSION['movie_folder'] = $res->name;
-
-        $command = "cd storage/movies/ && torrent $torrent";
-        exec($command);
+        return $path;
 
     }
 }

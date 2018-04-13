@@ -52,6 +52,14 @@ body {
 	z-index: 1;
 }
 
+.mydiv_float {
+	position: fixed !important;
+	bottom: 500px;
+	right: 500px;
+	top: auto;
+	left: auto;
+}
+
 #mydivheader {
 	cursor: auto;
 	/*z-index: 10;*/

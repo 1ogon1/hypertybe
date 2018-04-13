@@ -1,6 +1,6 @@
 @include('layout.header')
 <div class="row filter">
-    <div class="col-lg-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
         <p>Genre:</p>
         <div class="custom-select" style="width:200px;">
         <select name="" id="genre">
@@ -10,7 +10,7 @@
         </select>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
         <p>Rating:</p>
         <div class="custom-select" style="width:200px;">
         <select name="" id="minimalRating">
@@ -20,7 +20,7 @@
         </select>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4 col-sm-12 col-xs-12">
         <p>Quality:</p>
         <div class="custom-select" style="width:200px;">
         <select name="" id="quality">

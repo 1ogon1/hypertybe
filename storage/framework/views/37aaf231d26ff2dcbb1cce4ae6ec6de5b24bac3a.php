@@ -82,11 +82,9 @@
                                         </p>
                                     </div>
                                     <?php $__currentLoopData = $movieInfo['torrents']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $torrent): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <div class="col-sm-2 col-xs-2 bottom">
-                                            <a href="/downloadmovie/<?php echo e($movieInfo['title_english']); ?>/<?php echo e(base64_encode($torrent['url'])); ?>/<?php echo e($torrent['quality']); ?>">
-                                                <?php echo e($torrent['quality']); ?>
+                                        <div class="col-sm-2 col-xs-2 bottom movie-info" data-title="<?php echo e($movieInfo['title_english']); ?>" data-torrent="<?php echo e(base64_encode($torrent['url'])); ?>" data-quality="<?php echo e($torrent['quality']); ?>">
+                                            <?php echo e($torrent['quality']); ?>
 
-                                            </a>
                                         </div>
                                         <div class="col-sm-10 col-xs-10 bottom">
                                             Size: <?php echo e($torrent['size']); ?>
@@ -111,7 +109,7 @@
                         </header>
                     </div>
                     <div class="panel-body video-panel">
-
+                        <div class="loader movie-info-loader"></div>
                     </div>
                 </div>
             </div>
@@ -119,7 +117,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-offset-1 col-sm-10">
+    <div class="col-sm-12">
         <div class="comment-list" id="comments">
             <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="comment-block">
@@ -156,5 +154,5 @@
         </div>
     </div>
 </div>
-<?php echo $__env->make('layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layout.footer_info', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <script src="<?php echo e(URL::asset('js/movieinfo.js')); ?>" type="text/javascript"></script>

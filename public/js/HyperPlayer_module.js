@@ -23,6 +23,8 @@ var HyperPlayer = (function () {
     var player_created_flag = 0;
     var my_cont = 0;
 
+    var g_unpin = 0;
+
 
 
     var dragable_part;
@@ -61,7 +63,7 @@ var HyperPlayer = (function () {
         return h+":"+(m < 10 ? '0'+m : m)+":"+(s < 10? '0'+s : s); //zero padding on minutes and seconds
     };
 
-    function loadVideo(id)
+    function loadVideo(id, time)
     {
         var video = document.getElementById('video');
         var mp4 = document.getElementById('video-source-id');
@@ -76,10 +78,25 @@ var HyperPlayer = (function () {
         // video.load();
 
 
-        // video.play();
+
+        //--console.log("[Load on time = " + time + "]");
+        if ( !isNaN(time) ) {
+            //--console.log(video);
+            video.currentTime = time;
+            current_time = time;
+            playVideo();
+        }
+
     }
 
 
+
+    function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
 
 
     var timelineFunc = function () {
@@ -92,23 +109,35 @@ var HyperPlayer = (function () {
 
 
         document.getElementById("video").ontimeupdate = function() {
-            // console.log(document.getElementById("video").currentTime);
-            // console.log('***  6| ontimeupdate ****');
+            // //--console.log(document.getElementById("video").currentTime);
+            // //--console.log('***  6| ontimeupdate ****');
+
+
+            //--console.log('!!time to cooke!!' +  document.getElementById("video").currentTime  );
+            document.cookie = "video-time=" + document.getElementById("video").currentTime + '; path=/profile';
+            document.cookie = "video-time=" + document.getElementById("video").currentTime + '; path=/';
+
 
             if (title_flag === 0 && typeof(movie_titles) !== "undefined" && video_downloaded > 5 ) {
                      parseSubtitle(movie_titles);
 
-                     console.log('type 1 = ' + typeof(subtitleEn));
-                    if ( typeof(subtitleEn) !== "undefined") {
+                     if (typeof(subtitleEn) !== "undefined" && isNaN(subtitleEn[0].start)) {
+                         title_flag = 1;
+                     }
+
+                    if ( typeof(subtitleEn) !== "undefined" && !isNaN(subtitleEn[0].start)) {
+                        //--console.log('type 1 = ' + typeof(subtitleEn));
                         $('.sub-btn').css('display', 'block');
                         title_flag = 1;
+                        //--console.log('titles is ready');
+                        //--console.log()
                     }
                 }
 
 
             video = document.getElementById("video");
 
-            // console.log(subtitleEn.length);
+            // //--console.log(subtitleEn.length);
             if (title_flag === 1) {
                 if (subtitleEn.length > 0) {
                     while ( video.currentTime > subtitleEn[currentTitleId].end ) {
@@ -118,7 +147,7 @@ var HyperPlayer = (function () {
                     if (video.currentTime >= subtitleEn[currentTitleId].start && video.currentTime <= subtitleEn[currentTitleId].end) {
                         if (currentTitleText !== subtitleEn[currentTitleId].text) {
                             currentTitleText = subtitleEn[currentTitleId].text;
-                            console.log(currentTitleText);
+                            //--console.log(currentTitleText);
                             $('.title-div').html(currentTitleText);
                         }
                     } else {
@@ -129,8 +158,8 @@ var HyperPlayer = (function () {
 
 
 
-            // console.log('*Line percen = ' + line_percent);
-            // console.log('*video downloaded = ' + video_downloaded);
+            // //--console.log('*Line percen = ' + line_percent);
+            // //--console.log('*video downloaded = ' + video_downloaded);
 
             if (line_percent > (video_downloaded - 2)) {
                 line_percent = video_downloaded - 2;
@@ -138,20 +167,21 @@ var HyperPlayer = (function () {
 
 
             if (document.getElementById("video").currentTime === document.getElementById("video").duration) {
-                loadVideo(full_movie_name);
+                //--console.log("Action 1");
+                loadVideo(full_movie_name, document.getElementById("video").currentTime);
             }
 
             if ( (line_percent >= (video_downloaded - 2)) && video_downloaded < 100 ) {
                 // document.getElementById("video").load();
-                loadVideo(full_movie_name);
-                pauseVideo();
+                //--console.log("Action 2");
+                loadVideo(full_movie_name, document.getElementById("video").currentTime );
+                // pauseVideo();
                 line_percent = video_downloaded - 2;
                 var tmp = secondsTimeSpanToHMS( (line_percent * document.getElementById("video").duration / 100 ));
                 if (tmp < 0 || isNaN(tmp)) {
                     document.getElementById("video").currentTime = 0;
                 } else {
-                    document.getElementById("video").currentTime = tmp;
-
+                    // document.getElementById("video").currentTime = tmp;
                 }
             } else {
                 if ( (source_progress)  <= line_percent) {
@@ -186,11 +216,20 @@ var HyperPlayer = (function () {
                         // if ( video.readyState === 4 ) {
                         //     it's loaded
                         // alert('LOADED');
-                        console.log('RELOAD WIDEO. current_progress[' + secondsTimeSpanToHMS(source_progress * document.getElementById("video").duration / 100) + ']. Next progress [' + secondsTimeSpanToHMS((video_downloaded - 2) * document.getElementById("video").duration / 100) + ']');
+                        //--console.log('RELOAD WIDEO. current_progress[' + secondsTimeSpanToHMS(source_progress * document.getElementById("video").duration / 100) + ']. Next progress [' + secondsTimeSpanToHMS((video_downloaded - 2) * document.getElementById("video").duration / 100) + ']');
+                        var save_time =  Math.round((source_progress * document.getElementById("video").duration / 100));
                         source_progress = video_downloaded - 2;
                         document.getElementById("video-source-id").src = full_movie_name;
                         // document.getElementById("video").load();
-                        loadVideo(full_movie_name);
+                        //--console.log("Action 3");
+
+
+
+                        // loadVideo(full_movie_name,  10 );
+                        if ( !isNaN(save_time)) {
+                            //--console.log("HERERERERE");
+                            loadVideo(full_movie_name,  save_time );
+                        }
 
 
                         // }
@@ -198,6 +237,8 @@ var HyperPlayer = (function () {
 
                     document.getElementById("video").currentTime = current_time;
                     if (play_flag === 1 /* &&  video_downloaded < 100 */) {
+                        document.getElementById("video").currentTime = Math.round(getCookie('video-time'));
+                        current_time =  Math.round(getCookie('video-time'));
                         playVideo();
                     }
                 }
@@ -205,8 +246,8 @@ var HyperPlayer = (function () {
             }
 
             // if (video.currentTime > 0) {
-            // console.log('video DURATION = ' +video.duration);
-            // console.log('!!!!! CURRENT TIME = ' +  video.currentTime);
+            // //--console.log('video DURATION = ' +video.duration);
+            // //--console.log('!!!!! CURRENT TIME = ' +  video.currentTime);
                 line_percent = document.getElementById("video").currentTime * 100  / document.getElementById("video").duration;
             // }
 
@@ -242,15 +283,16 @@ var HyperPlayer = (function () {
 
 
         timeline.on('click', function(e) {
-            console.log('***** 7| click on timeline  *****');
+            //--console.log('***** 7| click on timeline  *****');
             // alert('clicl on timelime');
             var x = e.offsetX==undefined?e.layerX:e.offsetX;
 
             line_percent = x * 100  / timeline.width();
-            console.log('***** 7| line percent clicked = ' + line_percent);
+            //--console.log('***** 7| line percent clicked = ' + line_percent);
 
 
-            document.getElementById("video").currentTime = document.getElementById("video").duration * line_percent / 100;
+            loadVideo(full_movie_name, Math.round(document.getElementById("video").duration * line_percent / 100));
+            // document.getElementById("video").currentTime = document.getElementById("video").duration * line_percent / 100;
 
             currentTitleId = 0;
         });
@@ -277,7 +319,6 @@ var HyperPlayer = (function () {
     // draggable player
 
     function dragElement(elmnt) {
-
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         if (document.getElementById(elmnt.id + "header")) {
             /* if present, the header is where you move the DIV from:*/
@@ -312,19 +353,18 @@ var HyperPlayer = (function () {
             elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
             elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 
-            // console.log(flag_click);
+            // //--console.log(flag_click);
             flag_click = 0;
         }
 
         function closeDragElement() {
+            // alert(3);
             /* stop moving when mouse button is released:*/
             document.onmouseup = null;
             document.onmousemove = null;
-            // console.log('dragged');
+            // //--console.log('dragged');
         }
     }
-
-
 
     var HMStoseconds = function(hms) {
         var a = hms.split(':');
@@ -400,7 +440,7 @@ var HyperPlayer = (function () {
         };
 
     function create_player_div(callback) {
-        console.log('***** 5| create_player_div *****');
+        //--console.log('***** 5| create_player_div *****');
         var html_player = ' <div id="mydiv" class="vr-player-container">\n' +
             '                <div id="resizable" class="ui-widget-content">\n' +
             '                <input id="mydivheader" readonly>\n' +
@@ -488,11 +528,11 @@ var HyperPlayer = (function () {
         p_container.append(html_player);
 
         callback();
-        console.log('***** 5| create_player_div *****');
+        //--console.log('***** 5| create_player_div *****');
     }
 
     var initPlayer = function (mv_name, mv_subt_name, container) {
-        console.log('***** 4| initPlayer [in] *****');
+        //--console.log('***** 4| initPlayer [in] *****');
 
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!link to download video
@@ -501,28 +541,40 @@ var HyperPlayer = (function () {
 
 
 
-        console.log('0) ' + full_movie_name);
+        //--console.log('0) ' + full_movie_name);
 
 
-        console.log('1) ' + movie_folder_path);
-        console.log('2) ' + movie_folder);
-        console.log('3) ' + mv_name);
+        //--console.log('1) ' + movie_folder_path);
+        //--console.log('2) ' + movie_folder);
+        //--console.log('3) ' + mv_name);
 
 
         //  alert(full_movie_name);
-        console.log('4| movie path: ' + full_movie_name);
+        //--console.log('4| movie path: ' + full_movie_name);
 
         // alert('0' + mv_subt_name);
         if (typeof (mv_subt_name) !==  'undefined') {
             // !!!!!!!!!!!!!!!!!!!!!!!! link to download titles
-            movie_titles =  movie_folder_path + '/' + movie_folder.replace(/ /g, '%20') + '/' + mv_subt_name.replace(/ /g, '%20');
-            console.log('4| movie title path: ' + movie_titles);
+            movie_titles =  movie_folder_path  + mv_subt_name.replace(/ /g, '%20').replace('public/', '');
+            //--console.log('4| movie title path: ' + movie_titles);
         }
 
-        console.log('4| calling html player constructor');
+        //--console.log('4| calling html player constructor');
         create_player_div(function () {
-            console.log('****** 5| callback after player creationg *****');
+
+
+            //--console.log('****** 5| callback after player creationg *****');
             video = document.getElementById("video");
+            // //--console.log("#################");
+            if ( document.cookie.match('video-time') != null ) {
+                //--console.log('###get from cookie#####');
+                document.getElementById("video").currentTime = Math.round(getCookie('video-time'));
+                current_time =  Math.round(getCookie('video-time'));
+                //--console.log("####" + current_time + "#####");
+                // line_percent = source_progress;
+            }
+
+
             dragElement(document.getElementById(("mydiv")));
 
 
@@ -543,7 +595,6 @@ var HyperPlayer = (function () {
             });
 
             timeline = $('#timeline');
-
 
             $('.ui-resizable-handle').css('display', 'none');
 
@@ -603,36 +654,50 @@ var HyperPlayer = (function () {
                 clearInterval(hidePanels);
                 hidePanels = window.setInterval(hideToolbar, 4000);
             });
+            //--console.log("Action 4");
+            //--console.log(document.getElementById("video").currentTime);
+            loadVideo(full_movie_name, document.getElementById("video").currentTime );
 
-            loadVideo(full_movie_name);
-
-
+            if (g_unpin === 1) {
+                $('#mydiv').css("width", "400px");
+                $('#mydiv').css("height", "225px");
+                $('#resizable').css("width", "400px");
+                $('#resizable').css("height", "225px");
+                $('#mydiv').addClass('mydiv_float');
+                unpinPlayer();
+            }
             // ***************************************************
 
         });
     };
 
-    function getCurrentMovieSize() {
-        // console.log('***  3| getCurrentMovieSize [in]***');
 
-        // console.log('3| getting current size of torrent');
+    var tmp_i = 0;
+    function getCurrentMovieSize() {
+        // //--console.log('***  3| getCurrentMovieSize [in]***');
+
+        // //--console.log('3| getting current size of torrent');
 
         //todo ostanovka
-        $.post( php_script_size_path, { movie_path: movie_folder, _token: $('meta[name=csrf-token]').attr('content')})
+        $.post( php_script_size_path, { movie_path: movie_folder + '/', _token: $('meta[name=csrf-token]').attr('content')})
             .done(function( data ) {
 
 
                 video_downloaded = data;
+                if (tmp_i === 25) {
 
-                console.log('3| torrent_downloaded = [' + video_downloaded + ']');
+                    //--console.log('3| torrent_downloaded = [' + video_downloaded + ']');
+                    tmp_i = 0;
+                }
+                tmp_i++;
 
-                // console.log('3| check how many % dowloaded');
+                // //--console.log('3| check how many % dowloaded');
                 if (video_downloaded > 2 && player_created_flag === 0) {
-                    console.log('3| more than 5% dowloaded');
+                    //--console.log('3| more than 5% dowloaded');
                     player_created_flag = 1;
 
 
-                    // console.log('3| call player constructor');
+                    // //--console.log('3| call player constructor');
                     initPlayer(movie_name, movie_titles, p_container);
                 } else {
                     if (video_downloaded < 2) {
@@ -647,7 +712,7 @@ var HyperPlayer = (function () {
                 //      alert('try to find 1');
                 //
                 //
-                //      console.log('type 1 = ' + typeof(subtitleEn));
+                //      //--console.log('type 1 = ' + typeof(subtitleEn));
                 //     if ( typeof(subtitleEn) !== "undefined") {
                 //         $('.sub-btn').css('display', 'block');
                 //         alert('dd2');
@@ -677,45 +742,48 @@ var HyperPlayer = (function () {
 
                     source_progress = 100;
                 } else {
-                    $('#redline').css('width', (100 - (video_downloaded ) + 20 ) + '%');
+                    $('#redline').css('width', (100 - (video_downloaded ) + 10 ) + '%'); // redline
                 }
             });
 
-        // console.log('***  3| getCurrentMovieSize [out]***');
+        // //--console.log('***  3| getCurrentMovieSize [out]***');
     }
 
 
 
     var startLoading = function (folder_name, container) {
-        console.log('***** 2| startLoading [in] *****');
 
-        console.log('2| start interval to getting current movie size');
+        //--console.log('***** 2| startLoading [in] *****');
+
+        //--console.log('2| start interval to getting current movie size');
         SizeRequest = window.setInterval(getCurrentMovieSize, 1000);
 
-        console.log('***** 2| startLoading [out] *****');
+        //--console.log('***** 2| startLoading [out] *****');
     };
 
-    var dataFromFolder = function (folder_name, container) {
-        console.log('***** 1| dataFromFolder [in] *****');
+    var dataFromFolder = function (folder_name, container, unpin) {
+        //--console.log("Start: " + getCookie('video-time'))
+        g_unpin = unpin;
+        //--console.log('***** 1| dataFromFolder [in] *****');
         container.html('<div class="preload-page"><div class="loading-info">0%</div><div class="player-42-logo"></div><div class="player-unit-logo"></div><div class="pre-text"><div class="player-pre-text"><span class="notranslate">Hypertube</span> player.</div> <br/>Подготовка файлов. <br/> Пожалуйста, подождите.</div></div>');
 
-        movie_folder = folder_name; console.log('1| movie_folder = ' + movie_folder);
+        movie_folder = folder_name; //--console.log('1| movie_folder = ' + movie_folder);
         movie_folder = movie_folder.replace('public/','');
 
-        p_container = container;  console.log('1| player_container = ' + p_container);
+        p_container = container;  //--console.log('1| player_container = ' + p_container);
 
 
-        console.log('1| getting movie info');
+        //--console.log('1| getting movie info');
         $.post( php_script_patch, { folder: folder_name, _token: $('meta[name=csrf-token]').attr('content')})
             .done(function( data ) {
-                console.log("data [", data, "]");
+                //--console.log("data [", data, "]");
                 var movie_info = jQuery.parseJSON( data );
-                console.log('1| get info about movie from folder');
+                //--console.log('1| get info about movie from folder');
 
-                movie_name = movie_info[0];  console.log('1| movie_name = ' + movie_name);
-                movie_titles = movie_info[1]; console.log('1| movie_titles = ' + movie_titles);
+                movie_name = movie_info[0];  //--console.log('1| movie_name = ' + movie_name);
+                movie_titles = movie_info[1]; //--console.log('1| movie_titles = ' + movie_titles);
 
-                console.log('1| start checking loading');
+                //--console.log('1| start checking loading');
                 startLoading(movie_folder, p_container);
 
 
@@ -734,7 +802,7 @@ var HyperPlayer = (function () {
 
                 // initPlayer(movie_info[0], movie_info[1], container);
             });
-        console.log('***** 1| dataFromFolder [out] *****');
+        //--console.log('***** 1| dataFromFolder [out] *****');
 
     };
 
@@ -747,12 +815,13 @@ var HyperPlayer = (function () {
 
 
 
-    $(document).keydown(function(e) {
-        if (e.which == 32) {
-            HyperPlayer.playPause();
-            return false;
-        }
-    });
+    // $(document).keydown(function(e) {
+    //     alert(e.which);
+    //     if (e.which == 32) {
+    //         HyperPlayer.playPause();
+    //         return false;
+    //     }
+    // });
 
     $('body').on('click', function (e) {
         if (e.target.id === "mydivheader")
@@ -784,20 +853,34 @@ var HyperPlayer = (function () {
     };
 
     var playVideo = function () {
-        console.log('[play action]');
+
+        //--console.log('[play action]');
         if (line_percent >= video_downloaded) {
-            console.log('[cancel play action] => line_percent(' + line_percent +') >= ' + '( + ' + video_downloaded + ')' );
+            //--console.log('[cancel play action] => line_percent(' + line_percent +') >= ' + '( + ' + video_downloaded + ')' );
             return;
         }
 
-        $('.play-btn').addClass('pause-bgr');
-        document.getElementById("video").play();
+        //--console.log("!!!" + document.getElementById("video"));
+
+
+        var playPromise = document.getElementById("video").play();
+        if (playPromise !== undefined) {
+            // alert('ddd');
+            $('.play-btn').addClass('pause-bgr');
+            document.getElementById("video").play();
+        }
+
     };
 
     var pauseVideo = function () {
-        console.log('[pause action]');
+        //--console.log('[pause action]');
         $('.play-btn').removeClass('pause-bgr');
-        document.getElementById("video").pause();
+        var pausePromise = document.getElementById("video").pause();
+        if (pausePromise !== undefined) {
+            // alert('2');
+            document.getElementById("video").pause();
+        }
+
     };
 
 
@@ -827,6 +910,9 @@ var HyperPlayer = (function () {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
+
+
+
     };
 
     $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e) {
@@ -835,15 +921,17 @@ var HyperPlayer = (function () {
             full_s_btn.removeClass('small-screen-btn');
         } else {
             full_s_btn.addClass('small-screen-btn');
-
         }
 
         $('.bottom-bar').fadeIn(0);
         $('.top-left-bar').fadeIn(0);
         $('.top-right-bar').fadeIn(0);
         $('#mydivheader').css('cursor',  'default');
-        unping_btn.toggle();
-        save_btn.toggle();
+        if (!g_unpin) {
+            unping_btn.toggle();
+        }
+
+        // save_btn.toggle();
     });
 
     var fullScreen = function() {
@@ -860,6 +948,8 @@ var HyperPlayer = (function () {
         $('#resizable').css("height", "100%");
 
 
+
+
         var mydiv = document.querySelector("#mydiv");
 
         if (mydiv.requestFullscreen) {
@@ -870,6 +960,24 @@ var HyperPlayer = (function () {
             mydiv.webkitRequestFullscreen(); // Chrome and Safari
         }
     };
+
+    document.addEventListener('fullscreenchange', exitHandler);
+    document.addEventListener('webkitfullscreenchange', exitHandler);
+    document.addEventListener('mozfullscreenchange', exitHandler);
+    document.addEventListener('MSFullscreenChange', exitHandler);
+
+    function exitHandler() {
+        if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+
+            if (g_unpin) {
+                $('#mydiv').css("width", "400px");
+                $('#mydiv').css("height", "225px");
+                $('#resizable').css("width", "400px");
+                $('#resizable').css("height", "225px");
+                unpinPlayer();
+            }
+        }
+    }
 
     var pinPlayer = function () {
         unpin_btn.removeClass('unpinned-btn');
@@ -891,8 +999,12 @@ var HyperPlayer = (function () {
         $('.ui-resizable-handle').css('display', 'block');
         dragable_part.css('cursor', 'move');
         player_container.css('top', 20 + 'px').css('left', 20 + 'px');
-        player_container.css('width', player_container.parent().width() + 'px').css('height',  player_container.parent().height()+'px');
+        if (g_unpin === 1) {
+            player_container.css('top', 'auto').css('left',  'auto').css('right', "420px").css('bottom', "240px");
+            $('.unpin-btn').css('display', 'none');
 
+        }
+        player_container.css('width', player_container.parent().width() + 'px').css('height',  player_container.parent().height()+'px');
 
         player_container.css('position', 'absolute');
     };

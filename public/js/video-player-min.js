@@ -18,7 +18,6 @@ $(document).ready(function () {
             }, 500, function () {
                 $('#video-player-min').removeClass('my-fixed');
             });
-
         }
 
     });

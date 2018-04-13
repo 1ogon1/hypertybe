@@ -152,6 +152,16 @@ div.bottom {
     margin-bottom: 5px;
 }
 
+div.movie-info {
+    cursor: pointer;
+    color: #0000F0;
+}
+
 .nopadding {
     padding: 0 !important;
+}
+
+.movie-info-loader {
+    margin: auto !important;
+    margin-top: 20% !important;
 }

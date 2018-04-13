@@ -46,14 +46,6 @@
                            placeholder="Enter email" required>
                 </div>
                 <div class="form-group">
-                    <label for="language">Choose language</label>
-                    <select class="form-control" id="language" name="lang">
-                        <option value="ru" @if ($user->lang == "ru") selected @endif>Рус</option>
-                        <option value="en" @if ($user->lang == "en") selected @endif>Eng</option>
-                        <option value="fr" @if ($user->lang == "fr") selected @endif>Fra</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password"
                            aria-describedby="password"

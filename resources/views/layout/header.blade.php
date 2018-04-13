@@ -52,5 +52,6 @@
             </div>
         </header>
         </div>
+
         <div class="header-fixed-placeholder"></div>
     </div>

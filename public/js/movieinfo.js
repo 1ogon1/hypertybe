@@ -8,7 +8,7 @@ $(document).ready(function () {
         $.post('/addcomment', params, function (data) {
             data = JSON.parse(data);
             if (data.type == "success") {
-                console.log(data);
+                //console.log(data);
                 $('#comments').prepend(
                     '<div class="comment-block">' +
                         '<div class="comment-name">' +

@@ -38,6 +38,9 @@ class IndexController extends Controller
 
     public function Login()
     {
+        if (isset($_SESSION['email'])) {
+            return redirect('/');
+        }
         $title = 'Login';
         $fb = new Facebook([
             'app_id' => '177732936171160',
@@ -76,6 +79,9 @@ class IndexController extends Controller
 
     public function ResetPassword($token = null)
     {
+        if (isset($_SESSION['email'])) {
+            return redirect('/');
+        }
         if ($token)
         {
             $reset_password = DB::table('reset_passwords')
@@ -162,6 +168,9 @@ class IndexController extends Controller
 
     public function Register()
     {
+        if (isset($_SESSION['email'])) {
+            return redirect('/');
+        }
         return view('user.register')->with('title', 'Registration');
     }
 
@@ -178,7 +187,6 @@ class IndexController extends Controller
                 $user->token = $_POST['_token'];
                 $user->password = hash('whirlpool', $_POST['password']);
                 $user->active = 0;
-                $user->lang = "ru";
 
                 if ($user->save()) {
                     $activate = new Activate();
@@ -277,7 +285,6 @@ class IndexController extends Controller
             $user->token = $accessToken->getValue();
             $user->email = $profile['email'];
             $user->active = 0;
-            $user->lang = "ru";
 
             $user->save();
 
@@ -332,7 +339,6 @@ class IndexController extends Controller
                 $user->token = $response->access_token;
                 $user->email = $result->email;
                 $user->active = 0;
-                $user->lang = "ru";
 
                 $user->save();
                 $_SESSION['email'] = $result->email;
@@ -342,7 +348,7 @@ class IndexController extends Controller
             else {
                 $_SESSION['email'] = $result->email;
                 $_SESSION['user_id'] = $db_user->id;
-                return redirect('/profile/'.$db_user->id.'');
+                return redirect('/');
             }
 
         }
@@ -359,7 +365,6 @@ class IndexController extends Controller
                         'name' => $_POST['name'],
                         'surname' => $_POST['surname'],
                         'email' => $_POST['email'],
-                        'lang' => $_POST['lang']
                     ]);
             }
             else
@@ -370,7 +375,6 @@ class IndexController extends Controller
                         'name' => $_POST['name'],
                         'surname' => $_POST['surname'],
                         'email' => $_POST['email'],
-                        'lang' => $_POST['lang'],
                         'password' => hash('whirlpool', $_POST['password'])
                     ]);
 
@@ -394,6 +398,11 @@ class IndexController extends Controller
     {
         unset($_SESSION['email']);
         unset($_SESSION['user_id']);
+        unset($_SESSION['movie_id']);
+        unset($_SESSION['movie_name']);
+        unset($_SESSION['movie_link']);
+        unset($_SESSION['movie_folder']);
+
         return redirect('/login');
     }
 
